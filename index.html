@@ -1,0 +1,776 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="家計管理や資産形成の判断に役立つ無料シミュレーターを公開しています。住宅ローン、車買い替え、資産推移の試算ツール。" />
+  <title>資産形成・家計管理ツール集</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #f0f4f8;
+      --surface: #ffffff;
+      --primary: #2b6cb0;
+      --primary-light: #3182ce;
+      --primary-pale: #ebf4ff;
+      --text: #1a202c;
+      --text-muted: #64748b;
+      --border: #e8edf3;
+      --radius: 12px;
+      --shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+      --shadow-hover: 0 8px 24px rgba(43, 108, 176, 0.15);
+    }
+
+    body {
+      font-family: "Hiragino Sans", "Hiragino Kaku Gothic ProN", Meiryo, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.7;
+      padding: 32px 20px 64px;
+    }
+
+    .container {
+      max-width: 960px;
+      margin: 0 auto;
+    }
+
+    /* ① サイトタイトル・② サイト説明 */
+    .hero {
+      background: linear-gradient(135deg, var(--primary), var(--primary-light));
+      color: #fff;
+      border-radius: var(--radius);
+      padding: 40px 32px;
+      margin-bottom: 48px;
+      text-align: center;
+    }
+
+    .hero h1 {
+      font-size: clamp(1.35rem, 4.5vw, 1.75rem);
+      font-weight: 700;
+      margin-bottom: 16px;
+      letter-spacing: 0.02em;
+    }
+
+    .hero p {
+      font-size: clamp(0.9rem, 2.5vw, 1rem);
+      opacity: 0.92;
+      max-width: 520px;
+      margin: 0 auto;
+      line-height: 1.85;
+    }
+
+    /* セクション共通 */
+    .section {
+      margin-bottom: 48px;
+    }
+
+    .section-title {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 24px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid var(--primary-pale);
+    }
+
+    /* 導線ガイド */
+    .guide-box {
+      background: var(--surface);
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+      margin-bottom: 48px;
+    }
+
+    .guide-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px 20px;
+      padding: 18px 22px;
+      text-decoration: none;
+      color: inherit;
+      transition: background 0.15s ease;
+    }
+
+    .guide-item + .guide-item {
+      border-top: 1px solid var(--border);
+    }
+
+    .guide-item:hover,
+    .guide-item:focus-visible {
+      background: var(--primary-pale);
+      outline: none;
+    }
+
+    .guide-concern {
+      font-size: 0.92rem;
+      color: var(--text);
+      font-weight: 500;
+      line-height: 1.5;
+    }
+
+    .guide-target {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.88rem;
+      font-weight: 600;
+      color: var(--primary);
+      flex-shrink: 0;
+    }
+
+    .guide-target svg {
+      width: 16px;
+      height: 16px;
+      stroke: currentColor;
+      fill: none;
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      transition: transform 0.2s ease;
+    }
+
+    .guide-item:hover .guide-target svg,
+    .guide-item:focus-visible .guide-target svg {
+      transform: translateX(3px);
+    }
+
+    @media (max-width: 520px) {
+      .guide-item {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+        padding: 16px 18px;
+      }
+    }
+
+    /* ③ シミュレーター一覧 */
+    .simulator-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 24px;
+    }
+
+    @media (min-width: 640px) {
+      .simulator-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (min-width: 900px) {
+      body { padding: 48px 24px 80px; }
+      .simulator-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
+    .simulator-card {
+      display: flex;
+      flex-direction: column;
+      background: var(--surface);
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow);
+      padding: 28px 24px;
+      text-decoration: none;
+      color: inherit;
+      transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+      cursor: pointer;
+      min-height: 100%;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* バッジ（人気 / おすすめ / 新着 など） */
+    .card-badges {
+      position: absolute;
+      top: 16px;
+      right: 16px;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 6px;
+      z-index: 1;
+      pointer-events: none;
+    }
+
+    .card-badge {
+      display: inline-block;
+      font-size: 0.68rem;
+      font-weight: 700;
+      color: #fff;
+      padding: 4px 10px;
+      border-radius: 999px;
+      line-height: 1.35;
+      letter-spacing: 0.03em;
+      white-space: nowrap;
+    }
+
+    .card-badge--popular {
+      background: linear-gradient(135deg, #d97706, #f59e0b);
+      box-shadow: 0 2px 6px rgba(217, 119, 6, 0.28);
+    }
+
+    .card-badge--recommended {
+      background: linear-gradient(135deg, var(--primary), var(--primary-light));
+      box-shadow: 0 2px 6px rgba(43, 108, 176, 0.22);
+    }
+
+    .card-badge--new {
+      background: linear-gradient(135deg, #059669, #10b981);
+      box-shadow: 0 2px 6px rgba(5, 150, 105, 0.25);
+    }
+
+    .card-badge-note {
+      font-size: 0.62rem;
+      color: var(--text-muted);
+      text-align: right;
+      line-height: 1.45;
+      max-width: 118px;
+      opacity: 0.9;
+    }
+
+    .card-icon-wrap {
+      position: relative;
+      align-self: flex-start;
+      margin-bottom: 20px;
+    }
+
+    .simulator-card:hover,
+    .simulator-card:focus-visible {
+      transform: translateY(-3px);
+      box-shadow: var(--shadow-hover);
+      border-color: #bee3f8;
+      outline: none;
+    }
+
+    .simulator-card:active {
+      transform: translateY(-1px);
+    }
+
+    .card-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 10px;
+      background: var(--primary-pale);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .card-icon svg {
+      width: 26px;
+      height: 26px;
+      stroke: var(--primary);
+      fill: none;
+      stroke-width: 1.8;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .simulator-card h3 {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 12px;
+      line-height: 1.5;
+    }
+
+    .simulator-card.has-badges h3 {
+      padding-right: 72px;
+    }
+
+    .simulator-card.has-badge-note h3 {
+      padding-right: 88px;
+    }
+
+    @media (max-width: 400px) {
+      .card-badges {
+        top: 14px;
+        right: 14px;
+      }
+
+      .card-badge {
+        font-size: 0.64rem;
+        padding: 3px 8px;
+      }
+
+      .simulator-card.has-badges h3 {
+        padding-right: 64px;
+      }
+
+      .simulator-card.has-badge-note h3 {
+        padding-right: 76px;
+      }
+
+      .card-badge-note {
+        max-width: 100px;
+        font-size: 0.58rem;
+      }
+    }
+
+    .simulator-card p.card-desc {
+      font-size: 0.88rem;
+      color: var(--text-muted);
+      line-height: 1.75;
+    }
+
+    .card-recommend {
+      margin-top: 16px;
+      background: #f7fafc;
+      border: 1px solid #e8edf3;
+      border-radius: 8px;
+      padding: 14px 16px;
+    }
+
+    .card-recommend-title {
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: var(--primary);
+      margin-bottom: 8px;
+    }
+
+    .card-recommend ul {
+      list-style: none;
+    }
+
+    .card-recommend li {
+      display: flex;
+      align-items: flex-start;
+      gap: 6px;
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      line-height: 1.55;
+    }
+
+    .card-recommend li + li {
+      margin-top: 5px;
+    }
+
+    .card-recommend .check {
+      flex-shrink: 0;
+      color: var(--primary);
+      font-weight: 700;
+      font-size: 0.8rem;
+      line-height: 1.55;
+    }
+
+    .card-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      margin-top: auto;
+      padding-top: 20px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--primary);
+    }
+
+    .card-link svg {
+      width: 16px;
+      height: 16px;
+      stroke: currentColor;
+      fill: none;
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      transition: transform 0.2s ease;
+    }
+
+    .simulator-card:hover .card-link svg,
+    .simulator-card:focus-visible .card-link svg {
+      transform: translateX(3px);
+    }
+
+    /* ④ 運営者について・⑤ 注意事項 */
+    .info-box {
+      background: var(--surface);
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow);
+      padding: 28px 28px;
+    }
+
+    .info-box p {
+      font-size: 0.92rem;
+      color: var(--text-muted);
+      line-height: 1.85;
+    }
+
+    .info-box p + p {
+      margin-top: 1.1em;
+    }
+
+    .info-box.disclaimer {
+      background: #fffbeb;
+      border-color: #fde68a;
+    }
+
+    .info-box.disclaimer p {
+      color: #92400e;
+    }
+
+    /* 更新情報 */
+    .update-list {
+      list-style: none;
+    }
+
+    .update-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+      font-size: 0.92rem;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+
+    .update-item + .update-item {
+      margin-top: 14px;
+      padding-top: 14px;
+      border-top: 1px solid var(--border);
+    }
+
+    .update-date {
+      flex-shrink: 0;
+      font-weight: 600;
+      color: var(--primary);
+      min-width: 3.8em;
+    }
+
+    @media (max-width: 400px) {
+      .update-item {
+        flex-direction: column;
+        gap: 4px;
+      }
+    }
+
+    /* 今後追加予定 */
+    .planned-list {
+      list-style: none;
+      margin-top: 0.6em;
+    }
+
+    .planned-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+      font-size: 0.92rem;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+
+    .planned-item + .planned-item {
+      margin-top: 10px;
+    }
+
+    .planned-icon {
+      flex-shrink: 0;
+      font-size: 0.65rem;
+      color: var(--primary);
+      opacity: 0.75;
+      line-height: 1.85;
+    }
+
+    .planned-note {
+      margin-top: 1.2em;
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      opacity: 0.85;
+    }
+
+    footer {
+      margin-top: 56px;
+      text-align: center;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- ① サイトタイトル ② サイト説明 -->
+    <header class="hero">
+      <h1>資産形成・家計管理ツール集</h1>
+      <p>
+        家計管理や資産形成の判断に役立つ<br />
+        無料シミュレーターを公開しています。
+      </p>
+    </header>
+
+    <!-- 導線ガイド -->
+    <section class="section" aria-labelledby="guide-heading">
+      <h2 class="section-title" id="guide-heading">まずはどれを使えばいい？</h2>
+      <div class="guide-box">
+        <a href="loan/index.html" class="guide-item">
+          <span class="guide-concern">住宅ローンが気になる方</span>
+          <span class="guide-target">
+            住宅ローン × 投資比較
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg>
+          </span>
+        </a>
+        <a href="car/index.html" class="guide-item">
+          <span class="guide-concern">車の買い替えを検討中の方</span>
+          <span class="guide-target">
+            車買い替えコスト比較
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg>
+          </span>
+        </a>
+        <a href="asset/index.html" class="guide-item">
+          <span class="guide-concern">老後資金や資産形成が気になる方</span>
+          <span class="guide-target">
+            資産推移シミュレーター
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg>
+          </span>
+        </a>
+      </div>
+    </section>
+
+    <!-- ③ シミュレーター一覧 -->
+    <section class="section" aria-labelledby="simulators-heading">
+      <h2 class="section-title" id="simulators-heading">シミュレーター一覧</h2>
+      <div class="simulator-grid" id="simulator-grid"></div>
+    </section>
+
+    <!-- ④ 運営者について -->
+    <section class="section" aria-labelledby="about-heading">
+      <h2 class="section-title" id="about-heading">運営者について</h2>
+      <div class="info-box">
+        <p>
+          家計・住宅ローン・投資に興味があり、<br />
+          学習を兼ねてツールを作成しています。
+        </p>
+      </div>
+    </section>
+
+    <!-- 管理人のひとこと -->
+    <section class="section" aria-labelledby="message-heading">
+      <h2 class="section-title" id="message-heading">管理人のひとこと</h2>
+      <div class="info-box">
+        <p>
+          私自身、住宅ローンや子育て費用、<br />
+          車の維持費、老後資金など、<br />
+          将来のお金について考える機会が多くあります。
+        </p>
+        <p>
+          ネット上には様々な情報がありますが、<br />
+          最終的には自分の状況に当てはめて考えることが大切だと感じています。
+        </p>
+        <p>
+          このサイトのシミュレーターは、<br />
+          私自身が実際に悩んだテーマを<br />
+          数字で整理するために作成したものです。
+        </p>
+        <p>
+          同じように家計や資産形成について考えている方の<br />
+          参考になれば幸いです。
+        </p>
+      </div>
+    </section>
+
+    <!-- 更新情報 -->
+    <section class="section" aria-labelledby="updates-heading">
+      <h2 class="section-title" id="updates-heading">更新情報</h2>
+      <div class="info-box">
+        <ul class="update-list">
+          <li class="update-item">
+            <time class="update-date" datetime="2026-06">2026/06</time>
+            <span>資産推移シミュレーター公開</span>
+          </li>
+          <li class="update-item">
+            <time class="update-date" datetime="2026-06">2026/06</time>
+            <span>車買い替えコスト比較シミュレーター公開</span>
+          </li>
+          <li class="update-item">
+            <time class="update-date" datetime="2026-06">2026/06</time>
+            <span>住宅ローン × 投資比較シミュレーター公開</span>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- 今後追加予定 -->
+    <section class="section" aria-labelledby="planned-heading">
+      <h2 class="section-title" id="planned-heading">今後追加予定</h2>
+      <div class="info-box">
+        <p>現在開発を検討しているシミュレーター</p>
+        <ul class="planned-list">
+          <li class="planned-item">
+            <span class="planned-icon" aria-hidden="true">▶</span>
+            <span>教育費シミュレーター</span>
+          </li>
+          <li class="planned-item">
+            <span class="planned-icon" aria-hidden="true">▶</span>
+            <span>老後資産取り崩しシミュレーター</span>
+          </li>
+          <li class="planned-item">
+            <span class="planned-icon" aria-hidden="true">▶</span>
+            <span>NISA積立シミュレーター</span>
+          </li>
+        </ul>
+        <p class="planned-note">※内容は変更になる場合があります。</p>
+      </div>
+    </section>
+
+    <!-- ⑤ 注意事項 -->
+    <section class="section" aria-labelledby="disclaimer-heading">
+      <h2 class="section-title" id="disclaimer-heading">注意事項</h2>
+      <div class="info-box disclaimer">
+        <p>
+          本サイトのシミュレーターは参考試算です。<br />
+          実際の結果を保証するものではありません。
+        </p>
+      </div>
+    </section>
+
+    <footer>
+      <p>&copy; 資産形成・家計管理ツール集</p>
+    </footer>
+  </div>
+
+  <script>
+    (function () {
+      var simulators = [
+        {
+          title: "住宅ローン × 投資比較シミュレーター",
+          description: "住宅ローンの繰上返済と投資、どちらを優先した場合に将来の資産が多くなるか比較できます。",
+          href: "loan/index.html",
+          icon: "home",
+          badges: [{ type: "popular", rank: 1, note: "まず最初に試してほしいツール" }],
+          recommendations: [
+            "住宅ローンが残っている",
+            "繰上返済を検討している",
+            "投資とのバランスに悩んでいる"
+          ]
+        },
+        {
+          title: "車買い替えコスト比較シミュレーター",
+          description: "車を買い替える場合と乗り続ける場合の総コストを比較し、どちらがお得か確認できます。",
+          href: "car/index.html",
+          icon: "car",
+          recommendations: [
+            "車の買い替えを検討している",
+            "維持費を比較したい",
+            "燃費改善効果を確認したい"
+          ]
+        },
+        {
+          title: "資産推移シミュレーター",
+          description: "現在の資産や積立額から、将来の資産形成や老後資金の目安をシミュレーションできます。",
+          href: "asset/index.html",
+          icon: "chart",
+          recommendations: [
+            "老後資金が気になる",
+            "積立投資をしている",
+            "将来の資産形成を確認したい"
+          ]
+        }
+      ];
+
+      var icons = {
+        home: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 10.5L12 3l9 7.5"/><path d="M5 9.5V20h14V9.5"/><path d="M9 20v-6h6v6"/></svg>',
+        car: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 17h14"/><path d="M5 17a2 2 0 0 1-2-2v-3l2-5h14l2 5v3a2 2 0 0 1-2 2"/><circle cx="7.5" cy="17" r="1.5"/><circle cx="16.5" cy="17" r="1.5"/></svg>',
+        chart: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20V4"/><path d="M4 20h16"/><path d="M8 16v-4"/><path d="M12 16V8"/><path d="M16 16v-6"/></svg>'
+      };
+
+      var arrow = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg>';
+
+      function buildRecommend(items) {
+        var lis = items.map(function (item) {
+          return '<li><span class="check" aria-hidden="true">✓</span>' + item + "</li>";
+        }).join("");
+        return (
+          '<div class="card-recommend">' +
+          '<p class="card-recommend-title">こんな悩みありませんか？</p>' +
+          "<ul>" + lis + "</ul>" +
+          "</div>"
+        );
+      }
+
+      var BADGE_LABELS = {
+        popular: function (badge) {
+          return badge.rank ? "人気No." + badge.rank : null;
+        },
+        recommended: function () {
+          return "おすすめ";
+        },
+        new: function () {
+          return "新着";
+        }
+      };
+
+      function getBadgeLabel(badge) {
+        if (badge.label) return badge.label;
+        var resolver = BADGE_LABELS[badge.type];
+        return resolver ? resolver(badge) : null;
+      }
+
+      function buildBadges(badges) {
+        if (!badges || !badges.length) return "";
+
+        var hasNote = false;
+        var items = badges.map(function (badge) {
+          var label = getBadgeLabel(badge);
+          if (!label) return "";
+          var html =
+            '<span class="card-badge card-badge--' + badge.type + '">' +
+            label +
+            "</span>";
+          if (badge.note) {
+            hasNote = true;
+            html += '<span class="card-badge-note">' + badge.note + "</span>";
+          }
+          return html;
+        }).join("");
+
+        if (!items) return "";
+        return (
+          '<div class="card-badges"' +
+          (hasNote ? ' data-has-note="true"' : "") +
+          ">" +
+          items +
+          "</div>"
+        );
+      }
+
+      function hasBadgeNote(badges) {
+        if (!badges || !badges.length) return false;
+        return badges.some(function (badge) {
+          return !!badge.note;
+        });
+      }
+
+      function getBadgeAriaText(badges) {
+        if (!badges || !badges.length) return "";
+        var labels = badges.map(getBadgeLabel).filter(Boolean);
+        return labels.length ? "（" + labels.join("、") + "）" : "";
+      }
+
+      var grid = document.getElementById("simulator-grid");
+
+      simulators.forEach(function (sim) {
+        var card = document.createElement("a");
+        card.className =
+          "simulator-card" +
+          (sim.badges && sim.badges.length ? " has-badges" : "") +
+          (hasBadgeNote(sim.badges) ? " has-badge-note" : "");
+        card.href = sim.href;
+        card.setAttribute("aria-label", sim.title + "を開く" + getBadgeAriaText(sim.badges));
+
+        card.innerHTML =
+          buildBadges(sim.badges) +
+          '<div class="card-icon-wrap"><div class="card-icon">' + icons[sim.icon] + "</div></div>" +
+          "<h3>" + sim.title + "</h3>" +
+          '<p class="card-desc">' + sim.description + "</p>" +
+          buildRecommend(sim.recommendations) +
+          '<span class="card-link">シミュレーターを開く' + arrow + "</span>";
+
+        grid.appendChild(card);
+      });
+    })();
+  </script>
+</body>
+</html>
