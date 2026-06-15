@@ -7,6 +7,30 @@
   <meta property="og:title" content="資産形成・家計管理シミュレーター集｜住宅ローン・投資・教育費・車比較" />
   <meta property="og:description" content="住宅ローン比較、教育費準備、車買い替えコスト比較、資産形成の試算ができる無料シミュレーター集です。家計管理や将来設計にご活用ください。" />
   <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://financial-tools-lab.vercel.app/" />
+  <!--
+    ブランドアセット（index.html と同じ階層に配置）
+    ─────────────────────────────────────────────
+    favicon.ico
+      モチーフ: 家（住宅）＋ 上昇グラフ（資産形成）
+      コンセプト: 家計管理 × 資産形成
+
+    ogp-image.png（1200×630px 推奨）
+      タイトル: 資産形成・家計管理ツール集
+      サブ: 将来のお金を見える化する / 無料シミュレーター
+      アイコン: 🏠住宅ローン 🎓教育費 📈資産形成 🚗車比較
+      デザイン: サイト同様の青系（#2b6cb0 → #3182ce）
+    ─────────────────────────────────────────────
+    画像を差し替える場合は favicon.ico / ogp-image.png を上書きするだけで反映されます。
+  -->
+  <link rel="icon" href="favicon.ico" type="image/x-icon" />
+  <link rel="shortcut icon" href="favicon.ico" />
+  <meta property="og:image" content="https://financial-tools-lab.vercel.app/ogp-image.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content="資産形成・家計管理ツール集 - 将来のお金を見える化する無料シミュレーター" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:image" content="https://financial-tools-lab.vercel.app/ogp-image.png" />
   <title>資産形成・家計管理シミュレーター集｜住宅ローン・投資・教育費・車比較</title>
   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-32YGB007DL"></script>
@@ -499,6 +523,23 @@
       font-size: 0.8rem;
       color: var(--text-muted);
     }
+
+    .footer-links {
+      margin-bottom: 10px;
+    }
+
+    .footer-links a {
+      color: var(--primary);
+      text-decoration: none;
+      font-size: 0.82rem;
+      transition: color 0.15s ease;
+    }
+
+    .footer-links a:hover,
+    .footer-links a:focus-visible {
+      color: #1e4e8c;
+      outline: none;
+    }
   </style>
 </head>
 <body>
@@ -649,6 +690,9 @@
     </section>
 
     <footer>
+      <p class="footer-links">
+        <a href="privacy.html">プライバシーポリシー</a>
+      </p>
       <p>&copy; 資産形成・家計管理ツール集</p>
     </footer>
   </div>
