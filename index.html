@@ -3,11 +3,11 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="住宅ローンと投資の比較、車買い替えコスト比較、資産推移の試算ができる無料シミュレーター集です。家計管理や資産形成の判断にご活用ください。" />
-  <meta property="og:title" content="資産形成・家計管理シミュレーター集｜住宅ローン・投資・車買い替え比較" />
-  <meta property="og:description" content="住宅ローンと投資の比較、車買い替えコスト比較、資産推移の試算ができる無料シミュレーター集です。" />
+  <meta name="description" content="住宅ローン比較、教育費準備、車買い替えコスト比較、資産形成の試算ができる無料シミュレーター集です。家計管理や将来設計にご活用ください。" />
+  <meta property="og:title" content="資産形成・家計管理シミュレーター集｜住宅ローン・投資・教育費・車比較" />
+  <meta property="og:description" content="住宅ローン比較、教育費準備、車買い替えコスト比較、資産形成の試算ができる無料シミュレーター集です。家計管理や将来設計にご活用ください。" />
   <meta property="og:type" content="website" />
-  <title>資産形成・家計管理シミュレーター集｜住宅ローン・投資・車買い替え比較</title>
+  <title>資産形成・家計管理シミュレーター集｜住宅ローン・投資・教育費・車比較</title>
   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-32YGB007DL"></script>
   <script>
@@ -292,7 +292,7 @@
     }
 
     .simulator-card.has-badges h3 {
-      padding-right: 72px;
+      padding-right: 84px;
     }
 
     .simulator-card.has-badge-note h3 {
@@ -311,7 +311,7 @@
       }
 
       .simulator-card.has-badges h3 {
-        padding-right: 64px;
+        padding-right: 76px;
       }
 
       .simulator-card.has-badge-note h3 {
@@ -523,6 +523,13 @@
             <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg>
           </span>
         </a>
+        <a href="https://education-fund-simulator.vercel.app/" class="guide-item">
+          <span class="guide-concern">子どもの教育費が気になる方</span>
+          <span class="guide-target">
+            教育費シミュレーター
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg>
+          </span>
+        </a>
         <a href="https://car-cost-simulator-jet.vercel.app/" class="guide-item">
           <span class="guide-concern">車の買い替えを検討中の方</span>
           <span class="guide-target">
@@ -589,6 +596,10 @@
         <ul class="update-list">
           <li class="update-item">
             <time class="update-date" datetime="2026-06">2026/06</time>
+            <span>教育費シミュレーター公開</span>
+          </li>
+          <li class="update-item">
+            <time class="update-date" datetime="2026-06">2026/06</time>
             <span>資産推移シミュレーター公開</span>
           </li>
           <li class="update-item">
@@ -611,15 +622,15 @@
         <ul class="planned-list">
           <li class="planned-item">
             <span class="planned-icon" aria-hidden="true">▶</span>
-            <span>教育費シミュレーター</span>
-          </li>
-          <li class="planned-item">
-            <span class="planned-icon" aria-hidden="true">▶</span>
             <span>老後資産取り崩しシミュレーター</span>
           </li>
           <li class="planned-item">
             <span class="planned-icon" aria-hidden="true">▶</span>
             <span>NISA積立シミュレーター</span>
+          </li>
+          <li class="planned-item">
+            <span class="planned-icon" aria-hidden="true">▶</span>
+            <span>ライフプランシミュレーター</span>
           </li>
         </ul>
         <p class="planned-note">※内容は変更になる場合があります。</p>
@@ -650,7 +661,7 @@
           description: "住宅ローンの繰上返済と投資、どちらを優先した場合に将来の資産が多くなるか比較できます。",
           href: "https://mortgage-invest-simulator.vercel.app/",
           icon: "home",
-          badges: [{ type: "popular", rank: 1, note: "まず最初に試してほしいツール" }],
+          badges: [{ type: "popular", rank: 1 }],
           recommendations: [
             "住宅ローンが残っている",
             "繰上返済を検討している",
@@ -678,13 +689,26 @@
             "積立投資をしている",
             "将来の資産形成を確認したい"
           ]
+        },
+        {
+          title: "教育費シミュレーター",
+          description: "子どもの大学進学に向けて、毎月の積立や運用を続けた場合の教育資金を試算できます。",
+          href: "https://education-fund-simulator.vercel.app/",
+          icon: "education",
+          badges: [{ type: "new" }],
+          recommendations: [
+            "教育費の準備を始めたい",
+            "子どもの大学資金が気になる",
+            "毎月の積立額の目安を知りたい"
+          ]
         }
       ];
 
       var icons = {
         home: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 10.5L12 3l9 7.5"/><path d="M5 9.5V20h14V9.5"/><path d="M9 20v-6h6v6"/></svg>',
         car: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 17h14"/><path d="M5 17a2 2 0 0 1-2-2v-3l2-5h14l2 5v3a2 2 0 0 1-2 2"/><circle cx="7.5" cy="17" r="1.5"/><circle cx="16.5" cy="17" r="1.5"/></svg>',
-        chart: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20V4"/><path d="M4 20h16"/><path d="M8 16v-4"/><path d="M12 16V8"/><path d="M16 16v-6"/></svg>'
+        chart: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20V4"/><path d="M4 20h16"/><path d="M8 16v-4"/><path d="M12 16V8"/><path d="M16 16v-6"/></svg>',
+        education: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3L1 9l4 2.18V17c0 2 3.5 4 7 4s7-2 7-4v-5.82L22 9z"/><path d="M12 3v6"/></svg>'
       };
 
       var arrow = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg>';
@@ -703,7 +727,7 @@
 
       var BADGE_LABELS = {
         popular: function (badge) {
-          return badge.rank ? "人気No." + badge.rank : null;
+          return badge.rank ? "🏆 人気No." + badge.rank : null;
         },
         recommended: function () {
           return "おすすめ";
