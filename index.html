@@ -429,7 +429,7 @@
       transform: translateX(3px);
     }
 
-    /* ④ 運営者について・⑤ 注意事項 */
+    /* 情報ボックス・開発状況・注意事項 */
     .info-box {
       background: var(--surface);
       border-radius: var(--radius);
@@ -451,13 +451,36 @@
     .info-box.disclaimer {
       background: #fffbeb;
       border-color: #fde68a;
+      padding: 16px 20px;
     }
 
     .info-box.disclaimer p {
       color: #92400e;
+      line-height: 1.7;
     }
 
-    /* 更新情報 */
+    .section-disclaimer {
+      margin-bottom: 32px;
+    }
+
+    .section-disclaimer .section-title {
+      margin-bottom: 16px;
+    }
+
+    /* 開発状況 */
+    .dev-status-group + .dev-status-group {
+      margin-top: 20px;
+      padding-top: 20px;
+      border-top: 1px solid var(--border);
+    }
+
+    .dev-status-heading {
+      font-size: 0.84rem;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 12px;
+    }
+
     .update-list {
       list-style: none;
     }
@@ -465,15 +488,15 @@
     .update-item {
       display: flex;
       align-items: flex-start;
-      gap: 16px;
-      font-size: 0.92rem;
+      gap: 12px;
+      font-size: 0.9rem;
       color: var(--text-muted);
-      line-height: 1.6;
+      line-height: 1.55;
     }
 
     .update-item + .update-item {
-      margin-top: 14px;
-      padding-top: 14px;
+      margin-top: 10px;
+      padding-top: 10px;
       border-top: 1px solid var(--border);
     }
 
@@ -484,30 +507,21 @@
       min-width: 3.8em;
     }
 
-    @media (max-width: 400px) {
-      .update-item {
-        flex-direction: column;
-        gap: 4px;
-      }
-    }
-
-    /* 今後追加予定 */
     .planned-list {
       list-style: none;
-      margin-top: 0.6em;
     }
 
     .planned-item {
       display: flex;
       align-items: flex-start;
       gap: 8px;
-      font-size: 0.92rem;
+      font-size: 0.9rem;
       color: var(--text-muted);
-      line-height: 1.6;
+      line-height: 1.55;
     }
 
     .planned-item + .planned-item {
-      margin-top: 10px;
+      margin-top: 8px;
     }
 
     .planned-icon {
@@ -519,10 +533,21 @@
     }
 
     .planned-note {
-      margin-top: 1.2em;
+      margin-top: 12px;
       font-size: 0.82rem;
       color: var(--text-muted);
       opacity: 0.85;
+    }
+
+    @media (max-width: 400px) {
+      .info-box {
+        padding: 22px 20px;
+      }
+
+      .update-item {
+        flex-direction: column;
+        gap: 2px;
+      }
     }
 
     footer {
@@ -638,98 +663,77 @@
       <div class="simulator-grid" id="simulator-grid"></div>
     </section>
 
-    <!-- ④ 運営者について -->
-    <section class="section" aria-labelledby="about-heading">
-      <h2 class="section-title" id="about-heading">運営者について</h2>
-      <div class="info-box">
-        <p>
-          家計・住宅ローン・投資に興味があり、<br />
-          学習を兼ねてツールを作成しています。
-        </p>
-      </div>
-    </section>
-
     <!-- 管理人のひとこと -->
     <section class="section" aria-labelledby="message-heading">
       <h2 class="section-title" id="message-heading">管理人のひとこと</h2>
       <div class="info-box">
         <p>
-          私自身、住宅ローンや子育て費用、<br />
-          車の維持費、老後資金など、<br />
-          将来のお金について考える機会が多くあります。
+          家計・住宅ローン・投資に興味があり、学習を兼ねてツールを作成しています。
+          私自身、住宅ローンや子育て費用、車の維持費、老後資金など、将来のお金について考える機会が多くあります。
         </p>
         <p>
-          ネット上には様々な情報がありますが、<br />
+          ネット上には様々な情報がありますが、
           最終的には自分の状況に当てはめて考えることが大切だと感じています。
         </p>
         <p>
-          このサイトのシミュレーターは、<br />
-          私自身が実際に悩んだテーマを<br />
-          数字で整理するために作成したものです。
-        </p>
-        <p>
-          同じように家計や資産形成について考えている方の<br />
-          参考になれば幸いです。
+          このサイトのシミュレーターは、
+          私自身が実際に悩んだテーマを数字で整理するために作成したものです。
+          同じように家計や資産形成について考えている方の参考になれば幸いです。
         </p>
       </div>
     </section>
 
-    <!-- 更新情報 -->
-    <section class="section" aria-labelledby="updates-heading">
-      <h2 class="section-title" id="updates-heading">更新情報</h2>
+    <!-- 開発状況 -->
+    <section class="section" aria-labelledby="dev-status-heading">
+      <h2 class="section-title" id="dev-status-heading">開発状況</h2>
       <div class="info-box">
-        <ul class="update-list">
-          <li class="update-item">
-            <time class="update-date" datetime="2026-06">2026/06</time>
-            <span>教育費シミュレーター公開</span>
-          </li>
-          <li class="update-item">
-            <time class="update-date" datetime="2026-06">2026/06</time>
-            <span>資産推移シミュレーター公開</span>
-          </li>
-          <li class="update-item">
-            <time class="update-date" datetime="2026-06">2026/06</time>
-            <span>車買い替えコスト比較シミュレーター公開</span>
-          </li>
-          <li class="update-item">
-            <time class="update-date" datetime="2026-06">2026/06</time>
-            <span>住宅ローン × 投資比較シミュレーター公開</span>
-          </li>
-        </ul>
+        <div class="dev-status-group">
+          <h3 class="dev-status-heading">【公開済み】</h3>
+          <ul class="update-list">
+            <li class="update-item">
+              <time class="update-date" datetime="2026-06">2026/06</time>
+              <span>教育費シミュレーター公開</span>
+            </li>
+            <li class="update-item">
+              <time class="update-date" datetime="2026-06">2026/06</time>
+              <span>資産推移シミュレーター公開</span>
+            </li>
+            <li class="update-item">
+              <time class="update-date" datetime="2026-06">2026/06</time>
+              <span>車買い替えコスト比較シミュレーター公開</span>
+            </li>
+            <li class="update-item">
+              <time class="update-date" datetime="2026-06">2026/06</time>
+              <span>住宅ローン × 投資比較シミュレーター公開</span>
+            </li>
+          </ul>
+        </div>
+        <div class="dev-status-group">
+          <h3 class="dev-status-heading">【開発予定】</h3>
+          <ul class="planned-list">
+            <li class="planned-item">
+              <span class="planned-icon" aria-hidden="true">▶</span>
+              <span>老後資産取り崩しシミュレーター</span>
+            </li>
+            <li class="planned-item">
+              <span class="planned-icon" aria-hidden="true">▶</span>
+              <span>NISA積立シミュレーター</span>
+            </li>
+            <li class="planned-item">
+              <span class="planned-icon" aria-hidden="true">▶</span>
+              <span>ライフプランシミュレーター</span>
+            </li>
+          </ul>
+          <p class="planned-note">※内容は変更になる場合があります</p>
+        </div>
       </div>
     </section>
 
-    <!-- 今後追加予定 -->
-    <section class="section" aria-labelledby="planned-heading">
-      <h2 class="section-title" id="planned-heading">今後追加予定</h2>
-      <div class="info-box">
-        <p>現在開発を検討しているシミュレーター</p>
-        <ul class="planned-list">
-          <li class="planned-item">
-            <span class="planned-icon" aria-hidden="true">▶</span>
-            <span>老後資産取り崩しシミュレーター</span>
-          </li>
-          <li class="planned-item">
-            <span class="planned-icon" aria-hidden="true">▶</span>
-            <span>NISA積立シミュレーター</span>
-          </li>
-          <li class="planned-item">
-            <span class="planned-icon" aria-hidden="true">▶</span>
-            <span>ライフプランシミュレーター</span>
-          </li>
-        </ul>
-        <p class="planned-note">※内容は変更になる場合があります。</p>
-      </div>
-    </section>
-
-    <!-- ⑤ 注意事項 -->
-    <section class="section" aria-labelledby="disclaimer-heading">
+    <!-- 注意事項 -->
+    <section class="section section-disclaimer" aria-labelledby="disclaimer-heading">
       <h2 class="section-title" id="disclaimer-heading">注意事項</h2>
       <div class="info-box disclaimer">
-        <p>
-          本サイトのシミュレーターは参考試算です。<br />
-          実際の結果を保証するものではありません。
-        </p>
+        <p>本サイトのシミュレーターは参考試算です。実際の結果を保証するものではありません。</p>
       </div>
     </section>
 
