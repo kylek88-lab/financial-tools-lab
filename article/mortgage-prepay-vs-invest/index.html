@@ -281,6 +281,12 @@
       transform: translateX(3px);
     }
 
+    .related-tools-list {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
     footer {
       margin-top: 48px;
       text-align: center;
@@ -458,22 +464,7 @@
 
     <section aria-labelledby="related-heading">
       <h2 class="section-title" id="related-heading">関連シミュレーター</h2>
-      <a
-        href="https://mortgage-invest-simulator.vercel.app/"
-        class="related-card"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        <h3>住宅ローン × 投資比較シミュレーター</h3>
-        <p>
-          繰上返済と投資、どちらを優先した場合に将来の資産が多くなるか、
-          あなたの条件で試算できます。
-        </p>
-        <span class="related-link">
-          シミュレーターを使う
-          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg>
-        </span>
-      </a>
+      <div class="related-tools-list" data-related-tools></div>
     </section>
     </div>
 
@@ -484,5 +475,6 @@
       <p>&copy; 資産形成・家計管理ツール集</p>
     </footer>
   </div>
+  <script src="../../js/related-tools.js"></script>
 </body>
 </html>
