@@ -429,6 +429,82 @@
       transform: translateX(3px);
     }
 
+    /* 人気コラム */
+    .column-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 20px;
+    }
+
+    @media (min-width: 640px) {
+      .column-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    .column-card {
+      display: flex;
+      flex-direction: column;
+      background: var(--surface);
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow);
+      padding: 24px 22px;
+      text-decoration: none;
+      color: inherit;
+      transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+      min-height: 100%;
+    }
+
+    .column-card:hover,
+    .column-card:focus-visible {
+      transform: translateY(-3px);
+      box-shadow: var(--shadow-hover);
+      border-color: #bee3f8;
+      outline: none;
+    }
+
+    .column-card h3 {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--text);
+      line-height: 1.55;
+      margin-bottom: 12px;
+    }
+
+    .column-card p.column-summary {
+      font-size: 0.88rem;
+      color: var(--text-muted);
+      line-height: 1.75;
+      flex: 1;
+    }
+
+    .column-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      margin-top: 18px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--primary);
+    }
+
+    .column-link svg {
+      width: 16px;
+      height: 16px;
+      stroke: currentColor;
+      fill: none;
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      transition: transform 0.2s ease;
+    }
+
+    .column-card:hover .column-link svg,
+    .column-card:focus-visible .column-link svg {
+      transform: translateX(3px);
+    }
+
     /* 情報ボックス・開発状況・注意事項 */
     .info-box {
       background: var(--surface);
@@ -668,6 +744,12 @@
     <section class="section" aria-labelledby="simulators-heading">
       <h2 class="section-title" id="simulators-heading">シミュレーター一覧</h2>
       <div class="simulator-grid" id="simulator-grid"></div>
+    </section>
+
+    <!-- 人気コラム -->
+    <section class="section" aria-labelledby="columns-heading">
+      <h2 class="section-title" id="columns-heading">人気コラム</h2>
+      <div class="column-grid" id="column-grid"></div>
     </section>
 
     <!-- 管理人のひとこと -->
@@ -916,6 +998,30 @@
           '<span class="card-link">' + (sim.linkText || "シミュレーターを開く") + arrow + "</span>";
 
         grid.appendChild(card);
+      });
+
+      var columns = [
+        {
+          title: "住宅ローン残高2,000万円、手元資金500万円なら繰上返済とオルカン投資どちらを優先すべきか",
+          summary: "住宅ローン繰上返済とオルカン投資の考え方を一般的なケースで比較します。",
+          href: "/article/mortgage-prepay-vs-invest"
+        }
+      ];
+
+      var columnGrid = document.getElementById("column-grid");
+
+      columns.forEach(function (col) {
+        var card = document.createElement("a");
+        card.className = "column-card";
+        card.href = col.href;
+        card.setAttribute("aria-label", col.title + "を読む");
+
+        card.innerHTML =
+          "<h3>" + col.title + "</h3>" +
+          '<p class="column-summary">' + col.summary + "</p>" +
+          '<span class="column-link">続きを読む' + arrow + "</span>";
+
+        columnGrid.appendChild(card);
       });
     })();
   </script>

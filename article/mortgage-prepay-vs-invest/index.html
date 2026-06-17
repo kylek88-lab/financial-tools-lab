@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="住宅ローン残高2,000万円・手元資金500万円の場合、繰上返済とオルカン投資のどちらを優先すべきか。一般的な考え方と判断のポイントを解説します。" />
+  <meta property="og:title" content="住宅ローン残高2,000万円、手元資金500万円なら繰上返済とオルカン投資どちらを優先すべきか" />
+  <meta property="og:description" content="住宅ローン繰上返済とオルカン投資の考え方を一般的なケースで比較します。" />
+  <meta property="og:type" content="article" />
+  <meta property="og:url" content="https://financial-tools-lab.vercel.app/article/mortgage-prepay-vs-invest/" />
+  <link rel="icon" href="../../favicon.ico" type="image/x-icon" />
+  <link rel="shortcut icon" href="../../favicon.ico" />
+  <meta property="og:image" content="https://financial-tools-lab.vercel.app/ogp-image.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:image" content="https://financial-tools-lab.vercel.app/ogp-image.png" />
+  <title>住宅ローン残高2,000万円、手元資金500万円なら繰上返済とオルカン投資どちらを優先すべきか｜資産形成・家計管理ツール集</title>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-32YGB007DL"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-32YGB007DL');
+  </script>
+  <!-- Microsoft Clarity -->
+  <script type="text/javascript">
+    (function(c,l,a,r,i,t,y){
+        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+    })(window, document, "clarity", "script", "x7zt8kdy69");
+  </script>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #f0f4f8;
+      --surface: #ffffff;
+      --primary: #2b6cb0;
+      --primary-light: #3182ce;
+      --primary-pale: #ebf4ff;
+      --text: #1a202c;
+      --text-muted: #64748b;
+      --border: #e8edf3;
+      --radius: 12px;
+      --shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+      --shadow-hover: 0 8px 24px rgba(43, 108, 176, 0.15);
+    }
+
+    body {
+      font-family: "Hiragino Sans", "Hiragino Kaku Gothic ProN", Meiryo, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.7;
+      padding: 24px 16px 64px;
+    }
+
+    .container {
+      max-width: 720px;
+      margin: 0 auto;
+    }
+
+    .site-nav {
+      margin-bottom: 16px;
+    }
+
+    .breadcrumb {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      line-height: 1.5;
+    }
+
+    .breadcrumb a {
+      color: var(--text-muted);
+      text-decoration: none;
+      transition: color 0.15s ease;
+    }
+
+    .breadcrumb a:hover,
+    .breadcrumb a:focus-visible {
+      color: var(--primary);
+      outline: none;
+    }
+
+    .breadcrumb-sep {
+      color: #94a3b8;
+      user-select: none;
+    }
+
+    .breadcrumb-current {
+      color: #475569;
+    }
+
+    .back-to-top {
+      display: inline-flex;
+      align-items: center;
+      margin-top: 10px;
+      margin-bottom: 20px;
+      font-size: 0.88rem;
+      font-weight: 500;
+      color: var(--primary);
+      text-decoration: none;
+      transition: color 0.15s ease;
+    }
+
+    .back-to-top:hover,
+    .back-to-top:focus-visible {
+      color: #1e4e8c;
+      outline: none;
+    }
+
+    .article-header {
+      background: linear-gradient(135deg, var(--primary), var(--primary-light));
+      color: #fff;
+      border-radius: var(--radius);
+      padding: 28px 22px;
+      margin-bottom: 24px;
+    }
+
+    .article-label {
+      display: inline-block;
+      font-size: 0.72rem;
+      font-weight: 600;
+      background: rgba(255, 255, 255, 0.2);
+      padding: 4px 10px;
+      border-radius: 999px;
+      margin-bottom: 12px;
+    }
+
+    .article-header h1 {
+      font-size: clamp(1.15rem, 4.2vw, 1.45rem);
+      font-weight: 700;
+      line-height: 1.55;
+      margin-bottom: 12px;
+    }
+
+    .article-date {
+      font-size: 0.82rem;
+      opacity: 0.9;
+    }
+
+    .article-body {
+      background: var(--surface);
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow);
+      padding: 24px 22px;
+      margin-bottom: 32px;
+    }
+
+    .article-body h2 {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--primary);
+      margin: 28px 0 12px;
+      padding-bottom: 8px;
+      border-bottom: 2px solid var(--primary-pale);
+    }
+
+    .article-body h2:first-child {
+      margin-top: 0;
+    }
+
+    .article-body p {
+      font-size: 0.92rem;
+      color: var(--text-muted);
+      line-height: 1.85;
+    }
+
+    .article-body p + p {
+      margin-top: 1em;
+    }
+
+    .article-body ul {
+      margin: 0.8em 0 0;
+      padding-left: 1.4em;
+      font-size: 0.92rem;
+      color: var(--text-muted);
+      line-height: 1.85;
+    }
+
+    .article-body li + li {
+      margin-top: 0.35em;
+    }
+
+    .article-note {
+      margin-top: 24px;
+      padding: 14px 16px;
+      background: #f7fafc;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      line-height: 1.7;
+    }
+
+    .section-title {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 16px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid var(--primary-pale);
+    }
+
+    .related-card {
+      display: flex;
+      flex-direction: column;
+      background: var(--surface);
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow);
+      padding: 22px 20px;
+      text-decoration: none;
+      color: inherit;
+      transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+    }
+
+    .related-card:hover,
+    .related-card:focus-visible {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-hover);
+      border-color: #bee3f8;
+      outline: none;
+    }
+
+    .related-card h3 {
+      font-size: 0.98rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 8px;
+      line-height: 1.5;
+    }
+
+    .related-card p {
+      font-size: 0.88rem;
+      color: var(--text-muted);
+      line-height: 1.7;
+      flex: 1;
+    }
+
+    .related-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      margin-top: 14px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--primary);
+    }
+
+    .related-link svg {
+      width: 16px;
+      height: 16px;
+      stroke: currentColor;
+      fill: none;
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      transition: transform 0.2s ease;
+    }
+
+    .related-card:hover .related-link svg,
+    .related-card:focus-visible .related-link svg {
+      transform: translateX(3px);
+    }
+
+    footer {
+      margin-top: 48px;
+      text-align: center;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    .footer-links {
+      margin-bottom: 10px;
+    }
+
+    .footer-links a {
+      color: var(--primary);
+      text-decoration: none;
+      font-size: 0.82rem;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <nav class="site-nav" aria-label="サイト内ナビゲーション">
+      <div class="breadcrumb" aria-label="パンくずリスト">
+        <a href="../../index.html">ホーム</a>
+        <span class="breadcrumb-sep" aria-hidden="true">&gt;</span>
+        <a href="../../index.html#columns-heading">コラム</a>
+        <span class="breadcrumb-sep" aria-hidden="true">&gt;</span>
+        <span class="breadcrumb-current" aria-current="page">住宅ローン残高2,000万円、手元資金500万円なら繰上返済とオルカン投資どちらを優先すべきか</span>
+      </div>
+      <a href="../../index.html" class="back-to-top">← ツール集トップへ戻る</a>
+    </nav>
+
+    <header class="article-header">
+      <span class="article-label">コラム</span>
+      <h1>住宅ローン残高2,000万円、手元資金500万円なら繰上返済とオルカン投資どちらを優先すべきか</h1>
+      <time class="article-date" datetime="2026-06-15">公開日：2026年6月15日</time>
+    </header>
+
+    <article class="article-body">
+      <p>
+        住宅ローンの繰上返済をするべきか、それとも投資を続けるべきか。
+        資産形成をしている人なら、一度は悩んだことがあるテーマではないでしょうか。
+      </p>
+      <p>
+        今回は、以下のような一般的なケースを想定して考えてみます。
+      </p>
+
+      <h2>想定ケース</h2>
+      <ul>
+        <li>年齢：45歳</li>
+        <li>家族構成：夫婦＋子供2人</li>
+        <li>世帯年収：800万円</li>
+        <li>住宅ローン残高：2,000万円</li>
+        <li>住宅ローン金利：1.2%</li>
+        <li>預貯金：500万円</li>
+        <li>投資資産（NISAなど）：300万円</li>
+      </ul>
+      <p>
+        手元資金に余裕ができたとき、
+      </p>
+      <p>
+        「住宅ローンを繰上返済するべきか」
+      </p>
+      <p>
+        それとも
+      </p>
+      <p>
+        「オルカン（全世界株式）へ投資するべきか」
+      </p>
+      <p>
+        迷う方も多いと思います。
+      </p>
+
+      <h2>繰上返済のメリット</h2>
+      <p>
+        繰上返済の最大のメリットは、確実に住宅ローンの利息負担を減らせることです。
+        住宅ローン金利が1.2%の場合、繰上返済による効果は実質的に年1.2%の確定利回りを得ることに近いと言えます。
+      </p>
+      <p>
+        また、
+      </p>
+      <ul>
+        <li>毎月の返済負担が軽くなる</li>
+        <li>借金が減る安心感がある</li>
+        <li>将来の金利上昇リスクを減らせる</li>
+      </ul>
+      <p>
+        といったメリットもあります。
+      </p>
+      <p>
+        特に教育費や老後資金が気になる世代にとって、「借金が減る安心感」は数字以上の価値があるかもしれません。
+      </p>
+
+      <h2>オルカン投資のメリット</h2>
+      <p>
+        一方で、オルカンは世界中の株式に分散投資できる商品です。
+        過去の長期実績では、住宅ローン金利を上回るリターンが期待できた時期も多くありました。
+      </p>
+      <p>
+        投資を選択するメリットとしては、
+      </p>
+      <ul>
+        <li>資産成長が期待できる</li>
+        <li>インフレに強い</li>
+        <li>手元資金を維持できる</li>
+      </ul>
+      <p>
+        ことが挙げられます。
+      </p>
+      <p>
+        ただし、将来のリターンは保証されていません。
+        短期的には大きく値下がりする可能性もあります。
+      </p>
+
+      <h2>比較してみる</h2>
+      <p>
+        繰上返済は、
+      </p>
+      <p>
+        「リターンは低めだが確実」
+      </p>
+      <p>
+        投資は、
+      </p>
+      <p>
+        「リターンは高い可能性があるが不確実」
+      </p>
+      <p>
+        という特徴があります。
+      </p>
+      <p>
+        つまり、単純に数字だけで決められる問題ではありません。
+      </p>
+
+      <h2>私ならどう考えるかと言いますと</h2>
+      <p>
+        このケースであれば、繰上返済か投資かの二択ではなく、両方を組み合わせることを考えます。
+      </p>
+      <p>
+        例えば、
+      </p>
+      <ul>
+        <li>200万円を繰上返済</li>
+        <li>100万円をオルカンへ投資</li>
+        <li>残りは教育費や生活防衛資金として確保</li>
+      </ul>
+      <p>
+        というように、リスクと安心感のバランスを取る方法です。
+      </p>
+      <p>
+        住宅ローンも投資も、どちらか一方が絶対に正しいとは言えません。
+        重要なのは、自分が安心して続けられる選択をすることです。
+      </p>
+
+      <h2>まとめ</h2>
+      <p>
+        住宅ローンの繰上返済とオルカン投資の比較には、明確な正解はありません。
+      </p>
+      <ul>
+        <li>安心感を重視するなら繰上返済</li>
+        <li>資産成長を重視するなら投資</li>
+        <li>迷うなら両方を組み合わせる</li>
+      </ul>
+      <p>
+        という考え方もあります。
+      </p>
+      <p>
+        ご自身の状況に当てはめて検討したい方は、ぜひシミュレーターで試算してみてください。
+      </p>
+
+      <p class="article-note">
+        ※本記事は一般的なケースを想定したシミュレーションであり、特定の投資商品や金融行動を推奨するものではありません。
+      </p>
+    </article>
+
+    <section aria-labelledby="related-heading">
+      <h2 class="section-title" id="related-heading">関連シミュレーター</h2>
+      <a
+        href="https://mortgage-invest-simulator.vercel.app/"
+        class="related-card"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        <h3>住宅ローン × 投資比較シミュレーター</h3>
+        <p>
+          繰上返済と投資、どちらを優先した場合に将来の資産が多くなるか、
+          あなたの条件で試算できます。
+        </p>
+        <span class="related-link">
+          シミュレーターを使う
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg>
+        </span>
+      </a>
+    </section>
+
+    <footer>
+      <p class="footer-links">
+        <a href="../../privacy.html">プライバシーポリシー</a>
+      </p>
+      <p>&copy; 資産形成・家計管理ツール集</p>
+    </footer>
+  </div>
+</body>
+</html>
