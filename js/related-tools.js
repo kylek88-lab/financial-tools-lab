@@ -98,12 +98,16 @@
     }
   ];
 
+  /** トップページと同じ表示順 */
+  var ALL_TOOL_IDS = ["mortgage", "education", "asset", "retirement", "car"];
+
   /**
    * 各ページで表示する関連シミュレーター（ツール id の配列）
    * コラム・記事ページ追加時はここに1行追加してください。
    */
   var PAGE_RELATED = {
-    "article/mortgage-prepay-vs-invest": ["mortgage"]
+    "article/mortgage-prepay-vs-invest": ALL_TOOL_IDS.slice(),
+    "article/education-fund-university-500man": ALL_TOOL_IDS.slice()
   };
 
   var BADGE_LABELS = {
@@ -138,7 +142,12 @@
   function getPageKey() {
     var path = window.location.pathname.replace(/^\/+|\/+$/g, "");
     if (!path || path === "index.html") return "index";
-    return path.replace(/\/index\.html$/, "");
+    path = path.replace(/\/index\.html$/, "");
+    var articleIdx = path.indexOf("article/");
+    if (articleIdx !== -1) {
+      return path.slice(articleIdx);
+    }
+    return path;
   }
 
   function resolveRelatedIds(container) {
@@ -149,7 +158,14 @@
       }).filter(Boolean);
     }
     var pageKey = container.getAttribute("data-page-key") || getPageKey();
-    return PAGE_RELATED[pageKey] || [];
+    var ids = PAGE_RELATED[pageKey];
+    if (ids && ids.length) return ids;
+    if (pageKey.indexOf("article/") === 0) {
+      return getToolsSorted().map(function (tool) {
+        return tool.id;
+      });
+    }
+    return [];
   }
 
   function getBadgeLabel(badge) {

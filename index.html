@@ -83,24 +83,132 @@
       background: linear-gradient(135deg, var(--primary), var(--primary-light));
       color: #fff;
       border-radius: var(--radius);
-      padding: 40px 32px;
+      padding: 28px 24px 24px;
       margin-bottom: 48px;
       text-align: center;
     }
 
     .hero h1 {
-      font-size: clamp(1.35rem, 4.5vw, 1.75rem);
+      font-size: clamp(1.3rem, 4.2vw, 1.65rem);
       font-weight: 700;
-      margin-bottom: 16px;
+      margin-bottom: 10px;
       letter-spacing: 0.02em;
+      line-height: 1.35;
     }
 
-    .hero p {
-      font-size: clamp(0.9rem, 2.5vw, 1rem);
-      opacity: 0.92;
+    .hero-tagline {
+      font-size: clamp(0.88rem, 2.4vw, 0.98rem);
+      font-weight: 600;
+      opacity: 0.95;
       max-width: 520px;
       margin: 0 auto;
-      line-height: 1.85;
+      line-height: 1.55;
+    }
+
+    .hero-sub {
+      font-size: clamp(0.74rem, 1.9vw, 0.82rem);
+      opacity: 0.82;
+      max-width: 520px;
+      margin: 6px auto 0;
+      line-height: 1.5;
+    }
+
+    .hero-themes {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px 16px;
+      margin-top: 20px;
+      padding-top: 18px;
+      border-top: 1px solid rgba(255, 255, 255, 0.2);
+      list-style: none;
+      text-align: center;
+    }
+
+    .hero-theme {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 2px 4px;
+      transition: transform 0.2s ease;
+    }
+
+    .hero-theme:hover {
+      transform: translateY(-3px);
+    }
+
+    .hero-theme-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 12px;
+      background: rgba(255, 255, 255, 0.14);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 8px;
+      flex-shrink: 0;
+    }
+
+    .hero-theme-icon svg {
+      width: 22px;
+      height: 22px;
+      stroke: #fff;
+      fill: none;
+      stroke-width: 1.8;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .hero-theme-title {
+      display: block;
+      font-size: clamp(0.82rem, 2.2vw, 0.9rem);
+      font-weight: 700;
+      color: #fff;
+      line-height: 1.4;
+    }
+
+    @media (min-width: 520px) and (max-width: 899px) {
+      .hero-themes {
+        grid-template-columns: repeat(6, 1fr);
+        gap: 22px 14px;
+        max-width: 520px;
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      .hero-theme:nth-child(-n+3) {
+        grid-column: span 2;
+      }
+
+      .hero-theme:nth-child(4) {
+        grid-column: 2 / 4;
+      }
+
+      .hero-theme:nth-child(5) {
+        grid-column: 4 / 6;
+      }
+    }
+
+    @media (min-width: 900px) {
+      .hero {
+        padding: 32px 32px 28px;
+      }
+
+      .hero-themes {
+        grid-template-columns: repeat(5, 1fr);
+        gap: 16px 12px;
+        margin-top: 22px;
+        padding-top: 20px;
+      }
+    }
+
+    @media (max-width: 360px) {
+      .hero {
+        padding: 24px 16px 20px;
+      }
+
+      .hero-themes {
+        gap: 18px 12px;
+      }
     }
 
     /* セクション共通 */
@@ -691,11 +799,41 @@
   <div class="container">
     <!-- ① サイトタイトル ② サイト説明 -->
     <header class="hero">
-      <h1>資産形成・家計管理ツール集</h1>
-      <p>
-        家計管理や資産形成の判断に役立つ<br />
-        無料シミュレーターを公開しています。
-      </p>
+      <h1>人生のお金シミュレーター</h1>
+      <p class="hero-tagline">人生のお金の選択を、数字で見える化する</p>
+      <p class="hero-sub">住宅ローン・教育費・老後資金・車購入・資産形成の無料シミュレーター</p>
+      <ul class="hero-themes" aria-label="このサイトで試算できるテーマ">
+        <li class="hero-theme">
+          <span class="hero-theme-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><path d="M3 10.5L12 3l9 7.5"/><path d="M5 9.5V20h14V9.5"/><path d="M9 20v-6h6v6"/></svg>
+          </span>
+          <span class="hero-theme-title">住宅ローン</span>
+        </li>
+        <li class="hero-theme">
+          <span class="hero-theme-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><path d="M12 3L1 9l4 2.18V17c0 2 3.5 4 7 4s7-2 7-4v-5.82L22 9z"/><path d="M12 3v6"/></svg>
+          </span>
+          <span class="hero-theme-title">教育費</span>
+        </li>
+        <li class="hero-theme">
+          <span class="hero-theme-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><path d="M4 20V4"/><path d="M4 20h16"/><path d="M18 8l-5 5-3-3-6 6"/></svg>
+          </span>
+          <span class="hero-theme-title">老後資金</span>
+        </li>
+        <li class="hero-theme">
+          <span class="hero-theme-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><path d="M5 17h14"/><path d="M5 17a2 2 0 0 1-2-2v-3l2-5h14l2 5v3a2 2 0 0 1-2 2"/><circle cx="7.5" cy="17" r="1.5"/><circle cx="16.5" cy="17" r="1.5"/></svg>
+          </span>
+          <span class="hero-theme-title">車購入</span>
+        </li>
+        <li class="hero-theme">
+          <span class="hero-theme-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><path d="M4 20V4"/><path d="M4 20h16"/><path d="M8 16v-4"/><path d="M12 16V8"/><path d="M16 16v-6"/></svg>
+          </span>
+          <span class="hero-theme-title">資産形成</span>
+        </li>
+      </ul>
     </header>
 
     <!-- 導線ガイド -->
@@ -804,6 +942,11 @@
       var arrow = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg>';
 
       var columns = [
+        {
+          title: "子供の大学進学までに教育費はいくら必要？まずは500万円で考えてみる",
+          summary: "大学進学までの教育費目安を300万・500万・800万・1000万円で比較する考え方を解説します。",
+          href: "/article/education-fund-university-500man"
+        },
         {
           title: "住宅ローン残高2,000万円、手元資金500万円なら繰上返済とオルカン投資どちらを優先すべきか",
           summary: "住宅ローン繰上返済とオルカン投資の考え方を一般的なケースで比較します。",
