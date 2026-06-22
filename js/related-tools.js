@@ -41,7 +41,6 @@
       description: "子どもの大学進学に向けて、毎月の積立や運用を続けた場合の教育資金を試算できます。",
       href: "https://education-fund-simulator.vercel.app/",
       icon: "education",
-      badges: [{ type: "new" }],
       recommendations: [
         "教育費の準備を始めたい",
         "子どもの大学資金が気になる",
