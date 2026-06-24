@@ -106,7 +106,8 @@
    */
   var PAGE_RELATED = {
     "article/mortgage-prepay-vs-invest": ALL_TOOL_IDS.slice(),
-    "article/education-fund-university-500man": ALL_TOOL_IDS.slice()
+    "article/education-fund-university-500man": ALL_TOOL_IDS.slice(),
+    "article/high-dividend-investing-40s-50s": ["asset", "retirement", "mortgage", "education", "car"]
   };
 
   var BADGE_LABELS = {
