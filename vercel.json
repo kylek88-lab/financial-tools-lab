@@ -1,3 +1,6 @@
 {
-  "buildCommand": "npm run generate-sitemap"
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "installCommand": "",
+  "buildCommand": "node scripts/generate-sitemap.js",
+  "outputDirectory": "."
 }
