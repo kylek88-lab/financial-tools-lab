@@ -78,6 +78,22 @@
       margin: 0 auto;
     }
 
+    .hero-visual {
+      margin: 0 0 24px;
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      background: var(--surface);
+      line-height: 0;
+    }
+
+    .hero-visual img {
+      display: block;
+      width: 100%;
+      height: auto;
+      object-fit: contain;
+    }
+
     /* ① サイトタイトル・② サイト説明 */
     .hero {
       background: linear-gradient(135deg, var(--primary), var(--primary-light));
@@ -821,6 +837,15 @@
 </head>
 <body>
   <div class="container">
+    <figure class="hero-visual">
+      <img
+        src="images/hero/site-hero.png"
+        alt="人生のお金を、数字で見える化。住宅ローン・教育費・老後資金・車購入・資産形成などをシミュレーションでサポート"
+        width="1024"
+        height="682"
+        decoding="async"
+      />
+    </figure>
     <!-- ① サイトタイトル ② サイト説明 -->
     <header class="hero">
       <h1>人生のお金シミュレーター</h1>
