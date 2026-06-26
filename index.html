@@ -230,6 +230,25 @@
       border-bottom: 2px solid var(--primary-pale);
     }
 
+    .section-header .section-title {
+      margin-bottom: 10px;
+    }
+
+    .section-lead {
+      font-size: 0.88rem;
+      color: var(--text-muted);
+      line-height: 1.7;
+      margin: 0;
+    }
+
+    .section-header {
+      margin-bottom: 24px;
+    }
+
+    .section-columns {
+      margin-top: 24px;
+    }
+
     /* 導線ガイド */
     .guide-box {
       background: var(--surface);
@@ -850,13 +869,19 @@
 
     <!-- ③ シミュレーター一覧 -->
     <section class="section" aria-labelledby="simulators-heading">
-      <h2 class="section-title" id="simulators-heading">シミュレーター一覧</h2>
+      <div class="section-header">
+        <h2 class="section-title" id="simulators-heading">🧮 まず試してみる</h2>
+        <p class="section-lead">あなたの家計や将来のお金をシミュレーションできます。</p>
+      </div>
       <div class="simulator-grid" id="simulator-grid"></div>
     </section>
 
     <!-- 人気コラム -->
-    <section class="section" aria-labelledby="columns-heading">
-      <h2 class="section-title" id="columns-heading">人気コラム</h2>
+    <section class="section section-columns" aria-labelledby="columns-heading">
+      <div class="section-header">
+        <h2 class="section-title" id="columns-heading">📖 読んで学ぶ</h2>
+        <p class="section-lead">30代後半〜50代の普通の会社員が感じる、お金・家族・仕事・人生についてのコラムです。</p>
+      </div>
       <div class="column-grid" id="column-grid"></div>
     </section>
 
