@@ -134,101 +134,15 @@
       margin-top: 0.65em;
     }
 
-    .hero-themes {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 20px 16px;
-      margin-top: 22px;
-      padding-top: 20px;
-      border-top: 1px solid rgba(255, 255, 255, 0.2);
-      list-style: none;
-      text-align: center;
-    }
-
-    .hero-theme {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      padding: 2px 4px;
-      transition: transform 0.2s ease;
-    }
-
-    .hero-theme:hover {
-      transform: translateY(-3px);
-    }
-
-    .hero-theme-icon {
-      width: 44px;
-      height: 44px;
-      border-radius: 12px;
-      background: rgba(255, 255, 255, 0.14);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin-bottom: 8px;
-      flex-shrink: 0;
-    }
-
-    .hero-theme-icon svg {
-      width: 22px;
-      height: 22px;
-      stroke: #fff;
-      fill: none;
-      stroke-width: 1.8;
-      stroke-linecap: round;
-      stroke-linejoin: round;
-    }
-
-    .hero-theme-title {
-      display: block;
-      font-size: clamp(0.82rem, 2.2vw, 0.9rem);
-      font-weight: 700;
-      color: #fff;
-      line-height: 1.4;
-    }
-
-    @media (min-width: 520px) and (max-width: 899px) {
-      .hero-themes {
-        grid-template-columns: repeat(6, 1fr);
-        gap: 22px 14px;
-        max-width: 520px;
-        margin-left: auto;
-        margin-right: auto;
-      }
-
-      .hero-theme:nth-child(-n+3) {
-        grid-column: span 2;
-      }
-
-      .hero-theme:nth-child(4) {
-        grid-column: 2 / 4;
-      }
-
-      .hero-theme:nth-child(5) {
-        grid-column: 4 / 6;
-      }
-    }
-
     @media (min-width: 900px) {
       .hero {
         padding: 32px 32px 28px;
-      }
-
-      .hero-themes {
-        grid-template-columns: repeat(5, 1fr);
-        gap: 16px 12px;
-        margin-top: 22px;
-        padding-top: 20px;
       }
     }
 
     @media (max-width: 360px) {
       .hero {
         padding: 24px 16px 20px;
-      }
-
-      .hero-themes {
-        gap: 18px 12px;
       }
     }
 
@@ -852,38 +766,6 @@
       <p class="hero-tagline">「このままで大丈夫かな？」——そんな将来のお金の不安を、30代後半〜50代の会社員の方と一緒に整理していくサイトです。</p>
       <p class="hero-intro">住宅ローン、教育費、老後資金、車の買い替え……人生には、さまざまなお金の悩みがあります。</p>
       <p class="hero-intro">シミュレーターで数字を整理しながら、正解を押し付けるのではなく、あなたに合った選択を考えられるようサポートします。</p>
-      <ul class="hero-themes" aria-label="このサイトで試算できるテーマ">
-        <li class="hero-theme">
-          <span class="hero-theme-icon" aria-hidden="true">
-            <svg viewBox="0 0 24 24"><path d="M3 10.5L12 3l9 7.5"/><path d="M5 9.5V20h14V9.5"/><path d="M9 20v-6h6v6"/></svg>
-          </span>
-          <span class="hero-theme-title">住宅ローン</span>
-        </li>
-        <li class="hero-theme">
-          <span class="hero-theme-icon" aria-hidden="true">
-            <svg viewBox="0 0 24 24"><path d="M12 3L1 9l4 2.18V17c0 2 3.5 4 7 4s7-2 7-4v-5.82L22 9z"/><path d="M12 3v6"/></svg>
-          </span>
-          <span class="hero-theme-title">教育費</span>
-        </li>
-        <li class="hero-theme">
-          <span class="hero-theme-icon" aria-hidden="true">
-            <svg viewBox="0 0 24 24"><path d="M4 20V4"/><path d="M4 20h16"/><path d="M18 8l-5 5-3-3-6 6"/></svg>
-          </span>
-          <span class="hero-theme-title">老後資金</span>
-        </li>
-        <li class="hero-theme">
-          <span class="hero-theme-icon" aria-hidden="true">
-            <svg viewBox="0 0 24 24"><path d="M5 17h14"/><path d="M5 17a2 2 0 0 1-2-2v-3l2-5h14l2 5v3a2 2 0 0 1-2 2"/><circle cx="7.5" cy="17" r="1.5"/><circle cx="16.5" cy="17" r="1.5"/></svg>
-          </span>
-          <span class="hero-theme-title">車購入</span>
-        </li>
-        <li class="hero-theme">
-          <span class="hero-theme-icon" aria-hidden="true">
-            <svg viewBox="0 0 24 24"><path d="M4 20V4"/><path d="M4 20h16"/><path d="M8 16v-4"/><path d="M12 16V8"/><path d="M16 16v-6"/></svg>
-          </span>
-          <span class="hero-theme-title">資産形成</span>
-        </li>
-      </ul>
     </header>
 
     <!-- 導線ガイド -->
