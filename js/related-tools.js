@@ -108,7 +108,8 @@
     "article/mortgage-prepay-vs-invest": ALL_TOOL_IDS.slice(),
     "article/education-fund-university-500man": ALL_TOOL_IDS.slice(),
     "article/high-dividend-investing-40s-50s": ["asset", "retirement", "mortgage", "education", "car"],
-    "article/child-changed-my-life": ["education", "asset", "mortgage", "retirement", "car"]
+    "article/child-changed-my-life": ["education", "asset", "mortgage", "retirement", "car"],
+    "article/money-isnt-the-most-important-after-child": ["education", "asset", "mortgage", "retirement", "car"]
   };
 
   var BADGE_LABELS = {
