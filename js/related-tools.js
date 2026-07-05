@@ -23,7 +23,7 @@
       order: 1,
       title: "住宅ローン × 投資比較シミュレーター",
       description: "住宅ローンの繰上返済と投資、どちらを優先した場合に将来の資産が多くなるか比較できます。",
-      href: "https://mortgage-invest-simulator.vercel.app/",
+      href: "/simulator/mortgage-invest/",
       icon: "home",
       badges: [{ type: "recommended" }],
       recommendations: [

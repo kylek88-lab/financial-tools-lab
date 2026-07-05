@@ -13,7 +13,8 @@ const OUTPUT = path.join(ROOT, "sitemap.xml");
 /** @type {Array<{ path: string, file: string }>} */
 const STATIC_PAGES = [
   { path: "/", file: "index.html" },
-  { path: "/privacy.html", file: "privacy.html" }
+  { path: "/privacy.html", file: "privacy.html" },
+  { path: "/simulator/mortgage-invest/", file: "simulator/mortgage-invest/index.html" }
 ];
 
 function escapeXml(value) {
