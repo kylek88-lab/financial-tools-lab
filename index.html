@@ -63,6 +63,23 @@
       --radius: 12px;
       --shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
       --shadow-hover: 0 8px 24px rgba(43, 108, 176, 0.15);
+      --scroll-offset: 16px;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html {
+        scroll-behavior: auto;
+      }
+    }
+
+    [id="guide-heading"],
+    [id="simulators-heading"],
+    [id="columns-heading"] {
+      scroll-margin-top: var(--scroll-offset);
     }
 
     body {
@@ -146,6 +163,61 @@
       }
     }
 
+    /* クイック導線 */
+    .quick-nav {
+      margin-bottom: 28px;
+    }
+
+    .quick-nav-title {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 12px;
+      text-align: center;
+    }
+
+    .quick-nav-buttons {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .quick-nav-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 14px 18px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      color: var(--text);
+      font-size: 0.92rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: background 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease;
+    }
+
+    .quick-nav-btn:hover,
+    .quick-nav-btn:focus-visible {
+      background: var(--primary-pale);
+      border-color: #bee3f8;
+      outline: none;
+    }
+
+    @media (min-width: 640px) {
+      .quick-nav-buttons {
+        flex-direction: row;
+        flex-wrap: wrap;
+      }
+
+      .quick-nav-btn {
+        flex: 1 1 calc(33.333% - 7px);
+        min-width: 160px;
+      }
+    }
+
     /* セクション共通 */
     .section {
       margin-bottom: 48px;
@@ -179,6 +251,45 @@
       margin-top: 24px;
     }
 
+    /* もっと見るボタン */
+    .expand-more-wrap {
+      margin-top: 16px;
+      text-align: center;
+    }
+
+    .expand-more-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      padding: 10px 20px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      color: var(--primary);
+      font-size: 0.88rem;
+      font-weight: 600;
+      font-family: inherit;
+      cursor: pointer;
+      box-shadow: var(--shadow);
+      transition: background 0.15s ease, border-color 0.15s ease;
+    }
+
+    .expand-more-btn:hover,
+    .expand-more-btn:focus-visible {
+      background: var(--primary-pale);
+      border-color: #bee3f8;
+      outline: none;
+    }
+
+    .expand-more-btn[hidden] {
+      display: none;
+    }
+
+    .is-collapsed-hidden {
+      display: none !important;
+    }
+
     /* 導線ガイド */
     .guide-box {
       background: var(--surface);
@@ -186,7 +297,6 @@
       border: 1px solid var(--border);
       box-shadow: var(--shadow);
       overflow: hidden;
-      margin-bottom: 48px;
     }
 
     .guide-item {
@@ -747,6 +857,218 @@
         font-size: 0.78rem;
       }
     }
+
+    /* Version2: スマホ最適化 */
+    @media (max-width: 639px) {
+      :root {
+        --scroll-offset: 12px;
+      }
+
+      body {
+        padding: 16px 16px 56px;
+      }
+
+      .hero-visual {
+        margin-bottom: 16px;
+      }
+
+      .hero {
+        padding: 16px 18px 14px;
+        margin-bottom: 20px;
+      }
+
+      .hero h1 {
+        margin-bottom: 6px;
+      }
+
+      .hero-tagline {
+        gap: 4px;
+      }
+
+      .hero-tagline-em {
+        line-height: 1.45;
+      }
+
+      .hero-tagline-sub {
+        line-height: 1.55;
+      }
+
+      .quick-nav {
+        margin-bottom: 20px;
+      }
+
+      .quick-nav-title {
+        font-size: 0.9rem;
+        margin-bottom: 10px;
+      }
+
+      .quick-nav-btn {
+        padding: 12px 16px;
+        font-size: 0.88rem;
+      }
+
+      .section {
+        margin-bottom: 28px;
+      }
+
+      .section-title {
+        margin-bottom: 16px;
+        padding-bottom: 8px;
+      }
+
+      .section-header {
+        margin-bottom: 16px;
+      }
+
+      .section-columns {
+        margin-top: 16px;
+      }
+
+      .guide-item {
+        padding: 14px 16px;
+        gap: 6px;
+      }
+
+      .guide-concern {
+        font-size: 0.88rem;
+        line-height: 1.45;
+      }
+
+      .simulator-grid {
+        gap: 14px;
+      }
+
+      .simulator-card {
+        padding: 18px 16px;
+      }
+
+      .card-icon-wrap {
+        margin-bottom: 12px;
+      }
+
+      .card-icon {
+        width: 40px;
+        height: 40px;
+        border-radius: 8px;
+      }
+
+      .card-icon svg {
+        width: 22px;
+        height: 22px;
+      }
+
+      .simulator-card h3 {
+        font-size: 0.98rem;
+        margin-bottom: 8px;
+        line-height: 1.4;
+      }
+
+      .simulator-card p.card-desc {
+        font-size: 0.84rem;
+        line-height: 1.55;
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 2;
+        overflow: hidden;
+      }
+
+      .card-recommend {
+        margin-top: 10px;
+        padding: 10px 12px;
+      }
+
+      .card-recommend-title {
+        font-size: 0.74rem;
+        margin-bottom: 6px;
+      }
+
+      .card-recommend li {
+        font-size: 0.78rem;
+        line-height: 1.45;
+      }
+
+      .card-recommend li + li {
+        margin-top: 3px;
+      }
+
+      .card-link {
+        padding-top: 12px;
+        font-size: 0.82rem;
+      }
+
+      .column-grid {
+        gap: 14px;
+      }
+
+      .column-card {
+        padding: 18px 16px;
+      }
+
+      .column-card h3 {
+        font-size: 0.95rem;
+        margin-bottom: 8px;
+        line-height: 1.45;
+      }
+
+      .column-card p.column-summary {
+        font-size: 0.84rem;
+        line-height: 1.55;
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 2;
+        overflow: hidden;
+      }
+
+      .column-link {
+        margin-top: 12px;
+        font-size: 0.82rem;
+      }
+
+      .info-box {
+        padding: 20px 18px;
+      }
+
+      .info-box p {
+        font-size: 0.88rem;
+        line-height: 1.7;
+      }
+
+      .info-box p + p {
+        margin-top: 0.85em;
+      }
+
+      .dev-status-group + .dev-status-group {
+        margin-top: 16px;
+        padding-top: 16px;
+      }
+
+      .dev-status-heading {
+        margin-bottom: 10px;
+      }
+
+      .update-item {
+        font-size: 0.86rem;
+        line-height: 1.45;
+      }
+
+      .update-item + .update-item {
+        margin-top: 8px;
+        padding-top: 8px;
+      }
+
+      .planned-item {
+        font-size: 0.86rem;
+      }
+
+      .planned-note {
+        margin-top: 10px;
+        font-size: 0.8rem;
+      }
+
+      footer {
+        margin-top: 40px;
+      }
+    }
   </style>
 </head>
 <body>
@@ -768,6 +1090,16 @@
         <span class="hero-tagline-sub">将来のお金や人生の不安を、一緒に考えていくサイトです。</span>
       </p>
     </header>
+
+    <!-- クイック導線 -->
+    <nav class="quick-nav" aria-labelledby="quick-nav-heading">
+      <h2 class="quick-nav-title" id="quick-nav-heading">まず何をしますか？</h2>
+      <div class="quick-nav-buttons">
+        <a class="quick-nav-btn" href="#simulators-heading">🧮 シミュレーターを試す</a>
+        <a class="quick-nav-btn" href="#columns-heading">📖 コラムを読む</a>
+        <a class="quick-nav-btn" href="#guide-heading">🔍 お悩みから探す</a>
+      </div>
+    </nav>
 
     <!-- 導線ガイド -->
     <section class="section" aria-labelledby="guide-heading">
@@ -791,6 +1123,11 @@
         <p class="section-lead">普通の会社員として経験したことや感じたことを綴っています。<br />あなたのお金や人生について、少し立ち止まって考えるきっかけになれば嬉しいです。</p>
       </div>
       <div class="column-grid" id="column-grid"></div>
+      <div class="expand-more-wrap">
+        <button type="button" class="expand-more-btn" id="column-expand-btn" aria-expanded="false" aria-controls="column-grid">
+          もっと見る
+        </button>
+      </div>
     </section>
 
     <!-- 管理人のひとこと -->
@@ -816,7 +1153,7 @@
     <!-- 開発状況 -->
     <section class="section" aria-labelledby="dev-status-heading">
       <h2 class="section-title" id="dev-status-heading">開発状況</h2>
-      <div class="info-box">
+      <div class="info-box" id="dev-status-box">
         <div class="dev-status-group">
           <h3 class="dev-status-heading">【公開済み】</h3>
           <ul class="update-list">
@@ -828,33 +1165,38 @@
               <time class="update-date" datetime="2026-06">2026/06</time>
               <span>教育費シミュレーター公開</span>
             </li>
-            <li class="update-item">
+            <li class="update-item is-collapsed-hidden" data-dev-collapsed>
               <time class="update-date" datetime="2026-06">2026/06</time>
               <span>資産推移シミュレーター公開</span>
             </li>
-            <li class="update-item">
+            <li class="update-item is-collapsed-hidden" data-dev-collapsed>
               <time class="update-date" datetime="2026-06">2026/06</time>
               <span>車買い替えコスト比較シミュレーター公開</span>
             </li>
-            <li class="update-item">
+            <li class="update-item is-collapsed-hidden" data-dev-collapsed>
               <time class="update-date" datetime="2026-06">2026/06</time>
               <span>住宅ローン × 投資比較シミュレーター公開</span>
             </li>
           </ul>
         </div>
-        <div class="dev-status-group">
+        <div class="dev-status-group" id="dev-status-planned">
           <h3 class="dev-status-heading">【開発予定】</h3>
           <ul class="planned-list">
             <li class="planned-item">
               <span class="planned-icon" aria-hidden="true">▶</span>
               <span>NISA積立シミュレーター</span>
             </li>
-            <li class="planned-item">
+            <li class="planned-item is-collapsed-hidden" data-dev-collapsed>
               <span class="planned-icon" aria-hidden="true">▶</span>
               <span>ライフプランシミュレーター</span>
             </li>
           </ul>
-          <p class="planned-note">※内容は変更になる場合があります</p>
+          <p class="planned-note is-collapsed-hidden" data-dev-collapsed>※内容は変更になる場合があります</p>
+        </div>
+        <div class="expand-more-wrap">
+          <button type="button" class="expand-more-btn" id="dev-expand-btn" aria-expanded="false" aria-controls="dev-status-box">
+            もっと見る
+          </button>
         </div>
       </div>
     </section>
@@ -879,6 +1221,7 @@
   <script>
     (function () {
       var arrow = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg>';
+      var COLUMN_INITIAL = 3;
 
       var columns = [
         {
@@ -919,10 +1262,11 @@
       ];
 
       var columnGrid = document.getElementById("column-grid");
+      var columnExpandBtn = document.getElementById("column-expand-btn");
 
-      columns.forEach(function (col) {
+      columns.forEach(function (col, index) {
         var card = document.createElement("a");
-        card.className = "column-card";
+        card.className = "column-card" + (index >= COLUMN_INITIAL ? " is-collapsed-hidden" : "");
         card.href = col.href;
         card.setAttribute("aria-label", col.title + "を読む");
 
@@ -933,6 +1277,33 @@
 
         columnGrid.appendChild(card);
       });
+
+      if (columns.length <= COLUMN_INITIAL && columnExpandBtn) {
+        columnExpandBtn.hidden = true;
+      }
+
+      if (columnExpandBtn) {
+        columnExpandBtn.addEventListener("click", function () {
+          var cards = columnGrid.querySelectorAll(".column-card.is-collapsed-hidden");
+          for (var i = 0; i < cards.length; i++) {
+            cards[i].classList.remove("is-collapsed-hidden");
+          }
+          columnExpandBtn.setAttribute("aria-expanded", "true");
+          columnExpandBtn.hidden = true;
+        });
+      }
+
+      var devExpandBtn = document.getElementById("dev-expand-btn");
+      if (devExpandBtn) {
+        devExpandBtn.addEventListener("click", function () {
+          var hidden = document.querySelectorAll("[data-dev-collapsed]");
+          for (var j = 0; j < hidden.length; j++) {
+            hidden[j].classList.remove("is-collapsed-hidden");
+          }
+          devExpandBtn.setAttribute("aria-expanded", "true");
+          devExpandBtn.hidden = true;
+        });
+      }
     })();
   </script>
 
