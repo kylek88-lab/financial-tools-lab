@@ -168,12 +168,10 @@
       margin-bottom: 28px;
     }
 
-    .quick-nav-title {
-      font-size: 0.95rem;
-      font-weight: 700;
-      color: var(--text);
-      margin-bottom: 12px;
-      text-align: center;
+    .quick-nav .section-title {
+      font-size: 1.12rem;
+      margin-bottom: 16px;
+      text-align: left;
     }
 
     .quick-nav-buttons {
@@ -574,33 +572,6 @@
       line-height: 1.55;
     }
 
-    .card-link {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      margin-top: auto;
-      padding-top: 20px;
-      font-size: 0.85rem;
-      font-weight: 600;
-      color: var(--primary);
-    }
-
-    .card-link svg {
-      width: 16px;
-      height: 16px;
-      stroke: currentColor;
-      fill: none;
-      stroke-width: 2;
-      stroke-linecap: round;
-      stroke-linejoin: round;
-      transition: transform 0.2s ease;
-    }
-
-    .simulator-card:hover .card-link svg,
-    .simulator-card:focus-visible .card-link svg {
-      transform: translateX(3px);
-    }
-
     /* 人気コラム */
     .column-grid {
       display: grid;
@@ -897,9 +868,9 @@
         margin-bottom: 20px;
       }
 
-      .quick-nav-title {
-        font-size: 0.9rem;
-        margin-bottom: 10px;
+      .quick-nav .section-title {
+        font-size: 1.08rem;
+        margin-bottom: 12px;
       }
 
       .quick-nav-btn {
@@ -989,11 +960,6 @@
 
       .card-recommend li + li {
         margin-top: 3px;
-      }
-
-      .card-link {
-        padding-top: 12px;
-        font-size: 0.82rem;
       }
 
       .column-grid {
@@ -1093,7 +1059,7 @@
 
     <!-- クイック導線 -->
     <nav class="quick-nav" aria-labelledby="quick-nav-heading">
-      <h2 class="quick-nav-title" id="quick-nav-heading">まず何をしますか？</h2>
+      <h2 class="section-title" id="quick-nav-heading">まず何をしますか？</h2>
       <div class="quick-nav-buttons">
         <a class="quick-nav-btn" href="#simulators-heading">🧮 シミュレーターを試す</a>
         <a class="quick-nav-btn" href="#columns-heading">📖 コラムを読む</a>

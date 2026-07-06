@@ -252,11 +252,7 @@
         "</div></div>" +
         "<h3>" + tool.title + "</h3>" +
         '<p class="card-desc">' + tool.description + "</p>" +
-        buildRecommend(tool.recommendations) +
-        '<span class="card-link">' +
-        (tool.linkText || "シミュレーターを開く") +
-        ARROW_SVG +
-        "</span>";
+        buildRecommend(tool.recommendations);
 
       container.appendChild(card);
     });
