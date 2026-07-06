@@ -23,6 +23,7 @@
       order: 1,
       title: "住宅ローン × 投資比較シミュレーター",
       description: "住宅ローンの繰上返済と投資、どちらを優先した場合に将来の資産が多くなるか比較できます。",
+      descriptionShort: "繰上返済と投資、どちらが有利か比較できます。",
       href: "/simulator/mortgage-invest/",
       icon: "home",
       badges: [{ type: "recommended" }],
@@ -39,6 +40,7 @@
       order: 2,
       title: "教育費シミュレーター",
       description: "子どもの大学進学に向けて、毎月の積立や運用を続けた場合の教育資金を試算できます。",
+      descriptionShort: "子どもの教育資金を、積立・運用の目安から試算できます。",
       href: "https://education-fund-simulator.vercel.app/",
       icon: "education",
       recommendations: [
@@ -54,6 +56,7 @@
       order: 3,
       title: "資産推移シミュレーター",
       description: "現在の資産や積立額から、将来の資産形成や老後資金の目安をシミュレーションできます。",
+      descriptionShort: "資産や積立額から、将来の資産形成の目安を試算できます。",
       href: "https://asset-simulator-five.vercel.app/",
       icon: "chart",
       recommendations: [
@@ -69,6 +72,7 @@
       order: 4,
       title: "老後資産取り崩しシミュレーター",
       description: "年金・生活費・資産額から、老後資金が何歳まで持つかを試算できます。80歳・90歳・100歳時点の残資産や、平均寿命まで資産が持つかも確認できます。",
+      descriptionShort: "老後資金が何歳まで持つか、年金と資産から試算できます。",
       href: "https://retirement-plan-simulator.vercel.app/",
       icon: "retirement",
       linkText: "シミュレーターを使う",
@@ -85,6 +89,7 @@
       order: 5,
       title: "車買い替えコスト比較シミュレーター",
       description: "車を買い替える場合と乗り続ける場合の総コストを比較し、どちらがお得か確認できます。",
+      descriptionShort: "買い替えと乗り続け、どちらが総コストでお得か比較できます。",
       href: "https://car-cost-simulator-jet.vercel.app/",
       icon: "car",
       recommendations: [
@@ -251,7 +256,7 @@
         (ICONS[tool.icon] || "") +
         "</div></div>" +
         "<h3>" + tool.title + "</h3>" +
-        '<p class="card-desc">' + tool.description + "</p>" +
+        '<p class="card-desc">' + (tool.descriptionShort || tool.description) + "</p>" +
         buildRecommend(tool.recommendations);
 
       container.appendChild(card);
