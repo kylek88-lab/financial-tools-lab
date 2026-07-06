@@ -996,6 +996,18 @@
       color: var(--text);
     }
 
+    a.site-menu-group-label {
+      text-decoration: none;
+      border-radius: 8px;
+      transition: background 0.15s ease;
+    }
+
+    a.site-menu-group-label:hover,
+    a.site-menu-group-label:focus-visible {
+      background: var(--primary-pale);
+      outline: none;
+    }
+
     .site-menu-sublist {
       list-style: none;
       padding-left: 8px;
@@ -1237,7 +1249,7 @@
     <ul class="site-menu-list">
       <li><a href="#" id="site-menu-home">🏠 ホーム</a></li>
       <li class="site-menu-group">
-        <span class="site-menu-group-label">🧮 おすすめシミュレーター</span>
+        <a href="#simulators-heading" class="site-menu-group-label site-menu-anchor">🧮 シミュレーター一覧</a>
         <ul class="site-menu-sublist">
           <li><a href="/simulator/mortgage-invest/">住宅ローン</a></li>
           <li><a href="https://education-fund-simulator.vercel.app/">教育費</a></li>
