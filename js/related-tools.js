@@ -73,7 +73,7 @@
       title: "老後資産取り崩しシミュレーター",
       description: "年金・生活費・資産額から、老後資金が何歳まで持つかを試算できます。80歳・90歳・100歳時点の残資産や、平均寿命まで資産が持つかも確認できます。",
       descriptionShort: "老後資金が何歳まで持つか、年金と資産から試算できます。",
-      href: "https://retirement-plan-simulator.vercel.app/",
+      href: "/simulator/retirement/",
       icon: "retirement",
       linkText: "シミュレーターを使う",
       recommendations: [
