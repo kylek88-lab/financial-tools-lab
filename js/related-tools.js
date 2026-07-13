@@ -90,7 +90,7 @@
       title: "車買い替えコスト比較シミュレーター",
       description: "車を買い替える場合と乗り続ける場合の総コストを比較し、どちらがお得か確認できます。",
       descriptionShort: "買い替えと乗り続け、どちらが総コストでお得か比較できます。",
-      href: "https://car-cost-simulator-jet.vercel.app/",
+      href: "/simulator/car/",
       icon: "car",
       recommendations: [
         "車の買い替えを検討している",

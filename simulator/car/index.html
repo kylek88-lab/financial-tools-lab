@@ -1,0 +1,1396 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-32YGB007DL"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-32YGB007DL');
+  </script>
+  <!-- Microsoft Clarity -->
+  <script type="text/javascript">
+    (function(c,l,a,r,i,t,y){
+        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+    })(window, document, "clarity", "script", "x7zt8kdy69");
+  </script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>車買い替え 比較シミュレーター</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: "Hiragino Sans", "Hiragino Kaku Gothic ProN", Meiryo, sans-serif;
+      background: #f0f4f8;
+      color: #1a202c;
+      line-height: 1.6;
+      padding: 24px 16px 48px;
+    }
+
+    .container {
+      max-width: 760px;
+      margin: 0 auto;
+    }
+
+    @media (min-width: 768px) {
+      .container { max-width: 1100px; }
+    }
+
+    /* サイト共通ナビゲーション */
+    .site-nav {
+      margin-bottom: 16px;
+    }
+
+    .breadcrumb {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.82rem;
+      color: #64748b;
+      line-height: 1.5;
+    }
+
+    .breadcrumb a {
+      color: #64748b;
+      text-decoration: none;
+      transition: color 0.15s ease;
+    }
+
+    .breadcrumb a:hover,
+    .breadcrumb a:focus-visible {
+      color: #2b6cb0;
+      outline: none;
+    }
+
+    .breadcrumb-sep {
+      color: #94a3b8;
+      user-select: none;
+    }
+
+    .breadcrumb-current {
+      color: #475569;
+    }
+
+    .back-to-top {
+      display: inline-flex;
+      align-items: center;
+      margin-top: 10px;
+      margin-bottom: 20px;
+      font-size: 0.88rem;
+      font-weight: 500;
+      color: #2b6cb0;
+      text-decoration: none;
+      transition: color 0.15s ease;
+    }
+
+    .back-to-top:hover,
+    .back-to-top:focus-visible {
+      color: #1e4e8c;
+      outline: none;
+    }
+
+    header {
+      background: linear-gradient(135deg, #2b6cb0, #3182ce);
+      color: #fff;
+      border-radius: 12px;
+      padding: 28px 24px;
+      margin-bottom: 24px;
+    }
+
+    header h1 { font-size: 1.4rem; margin-bottom: 8px; }
+    header p { font-size: 0.9rem; opacity: 0.9; }
+
+    .display-unit-bar {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 10px 16px;
+      margin-top: 16px;
+      padding-top: 14px;
+      border-top: 1px solid rgba(255, 255, 255, 0.25);
+    }
+
+    .display-unit-label { font-size: 0.82rem; font-weight: 600; }
+    .display-unit-options { display: flex; flex-wrap: wrap; gap: 8px 14px; }
+
+    .display-unit-option {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.85rem;
+      cursor: pointer;
+      color: rgba(255,255,255,0.85);
+    }
+
+    .display-unit-option input { width: auto; margin: 0; accent-color: #fff; }
+    .display-unit-option:has(input:checked) { font-weight: 700; color: #fff; }
+
+    section {
+      background: #fff;
+      border-radius: 12px;
+      padding: 24px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+      border: 1px solid #e8edf3;
+    }
+
+    /* PC: 左=入力、右=結果（判定・グラフ・表） */
+    .main-layout {
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+
+    @media (min-width: 768px) {
+      .main-layout {
+        display: grid;
+        grid-template-columns: 1fr 1.15fr;
+        grid-template-areas: "input result";
+        gap: 20px 24px;
+        align-items: start;
+      }
+      .section-input { grid-area: input; }
+      .section-result { grid-area: result; }
+    }
+
+    h2 { font-size: 1.05rem; color: #2d3748; margin-bottom: 6px; }
+
+    .section-desc {
+      font-size: 0.85rem;
+      color: #718096;
+      margin-bottom: 18px;
+    }
+
+    .step-badge {
+      display: inline-block;
+      background: #ebf8ff;
+      color: #2b6cb0;
+      font-size: 0.75rem;
+      font-weight: 700;
+      padding: 2px 8px;
+      border-radius: 99px;
+      margin-right: 6px;
+    }
+
+    .field-group {
+      margin-bottom: 20px;
+      padding-bottom: 4px;
+      border-bottom: 1px solid #edf2f7;
+    }
+
+    .field-group:last-of-type { border-bottom: none; }
+
+    .field-group-title {
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: #2b6cb0;
+      margin-bottom: 12px;
+    }
+
+    .field { margin-bottom: 14px; }
+
+    label {
+      display: block;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: #4a5568;
+      margin-bottom: 6px;
+    }
+
+    .input-wrap { display: flex; align-items: center; gap: 8px; }
+
+    input {
+      flex: 1;
+      padding: 10px 12px;
+      font-size: 1rem;
+      border: 1px solid #cbd5e0;
+      border-radius: 8px;
+      font-family: inherit;
+    }
+
+    input:focus {
+      outline: none;
+      border-color: #3182ce;
+      box-shadow: 0 0 0 3px rgba(49,130,206,0.2);
+    }
+
+    .unit {
+      font-size: 0.85rem;
+      color: #718096;
+      min-width: 2.5em;
+      flex-shrink: 0;
+    }
+
+    .hint { font-size: 0.78rem; color: #a0aec0; margin-top: 4px; }
+
+    .error {
+      background: #fff5f5;
+      border: 1px solid #feb2b2;
+      color: #c53030;
+      padding: 12px 16px;
+      border-radius: 8px;
+      font-size: 0.9rem;
+      margin-bottom: 16px;
+      display: none;
+    }
+
+    .error.show { display: block; }
+
+    /* 判定ボックス */
+    .verdict-box {
+      padding: 18px 20px;
+      border-radius: 12px;
+      text-align: center;
+      margin-bottom: 20px;
+      border: 2px solid #e2e8f0;
+      background: #f7fafc;
+    }
+
+    .verdict-box.keep-better {
+      background: #f0fff4;
+      border-color: #9ae6b4;
+    }
+
+    .verdict-box.replace-better {
+      background: #ebf8ff;
+      border-color: #90cdf4;
+    }
+
+    .verdict-box.neutral {
+      background: #fffff0;
+      border-color: #f6e05e;
+    }
+
+    .verdict-icon { font-size: 1.6rem; margin-bottom: 6px; line-height: 1; }
+
+    .verdict-main {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: #2d3748;
+      line-height: 1.4;
+    }
+
+    .verdict-box.keep-better .verdict-main { color: #276749; }
+    .verdict-box.replace-better .verdict-main { color: #2b6cb0; }
+
+    .verdict-sub {
+      font-size: 0.88rem;
+      color: #718096;
+      margin-top: 8px;
+    }
+
+    /* 積み上げ棒グラフ */
+    .chart-block {
+      margin-bottom: 20px;
+    }
+
+    .chart-block-title {
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: #2d3748;
+      margin-bottom: 14px;
+    }
+
+    .stacked-bar-item {
+      margin-bottom: 16px;
+    }
+
+    .stacked-bar-item:last-child { margin-bottom: 0; }
+
+    .stacked-bar-label {
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: #4a5568;
+      margin-bottom: 6px;
+    }
+
+    .stacked-bar-row {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .stacked-bar-track {
+      display: flex;
+      height: 36px;
+      border-radius: 8px;
+      overflow: hidden;
+      background: #edf2f7;
+      min-width: 0;
+    }
+
+    .stacked-seg {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100%;
+      min-width: 2px;
+      overflow: hidden;
+      transition: width 0.4s ease;
+      color: #fff;
+      font-size: 0.72rem;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+
+    .stacked-seg.seg-fuel { background: #3B82F6; }
+    .stacked-seg.seg-maint { background: #10B981; }
+    .stacked-seg.seg-vehicle { background: #F59E0B; }
+
+    .stacked-bar-total {
+      font-size: 1rem;
+      font-weight: 700;
+      color: #2d3748;
+      white-space: nowrap;
+    }
+
+    .chart-legend {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px 20px;
+      margin-top: 14px;
+      font-size: 0.78rem;
+      color: #718096;
+    }
+
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .legend-dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 3px;
+      flex-shrink: 0;
+    }
+
+    .legend-dot.fuel { background: #3B82F6; }
+    .legend-dot.maint { background: #10B981; }
+    .legend-dot.vehicle { background: #F59E0B; }
+
+    /* 比較表 */
+    .compare-table-wrap {
+      background: #f7fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 10px;
+      padding: 14px 10px;
+      margin-bottom: 16px;
+    }
+
+    .compare-table-block-title {
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: #2d3748;
+      margin-bottom: 12px;
+      padding: 0 4px;
+    }
+
+    .compare-table {
+      width: 100%;
+      border-collapse: collapse;
+      table-layout: fixed;
+      font-size: 0.84rem;
+    }
+
+    .compare-table th,
+    .compare-table td {
+      padding: 10px 6px;
+      text-align: right;
+      vertical-align: top;
+    }
+
+    .compare-table th:first-child,
+    .compare-table td:first-child {
+      text-align: left;
+      width: 26%;
+      color: #718096;
+      font-weight: 600;
+      vertical-align: middle;
+    }
+
+    .compare-table thead th {
+      font-size: 0.75rem;
+      font-weight: 700;
+      padding-bottom: 10px;
+      border-bottom: 1px solid #e2e8f0;
+    }
+
+    .compare-table th.col-keep {
+      background: #dbeafe;
+      color: #1e40af;
+      border-radius: 6px 6px 0 0;
+    }
+
+    .compare-table th.col-replace {
+      background: #d1fae5;
+      color: #065f46;
+      border-radius: 6px 6px 0 0;
+    }
+
+    .compare-table tbody tr + tr td {
+      border-top: 1px solid #edf2f7;
+    }
+
+    .cell-main {
+      font-weight: 700;
+      color: #2d3748;
+    }
+
+    .cell-sub {
+      font-size: 0.72rem;
+      color: #a0aec0;
+      margin-top: 3px;
+      line-height: 1.35;
+    }
+
+    .compare-table td.val-keep .cell-main { color: #276749; }
+    .compare-table td.val-replace .cell-main { color: #2b6cb0; }
+
+    .compare-table tr.row-total td {
+      background: #f0fdf4;
+      border-top: 2px solid #cbd5e0;
+      padding-top: 12px;
+      padding-bottom: 10px;
+    }
+
+    .compare-table tr.row-total td:first-child {
+      color: #2d3748;
+      font-weight: 700;
+      font-size: 0.9rem;
+    }
+
+    .compare-table tr.row-total .cell-main {
+      font-size: 1.05rem;
+    }
+
+    @media (max-width: 380px) {
+      .compare-table { font-size: 0.78rem; }
+      .stacked-seg { font-size: 0.65rem; }
+    }
+
+    /* 年間コスト */
+    .annual-cost {
+      background: #f7fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 10px;
+      padding: 14px 16px;
+      margin-bottom: 12px;
+    }
+
+    .annual-cost-title {
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: #4a5568;
+      margin-bottom: 10px;
+    }
+
+    .annual-cost-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 12px;
+      padding: 8px 0;
+    }
+
+    .annual-cost-row + .annual-cost-row {
+      border-top: 1px solid #edf2f7;
+    }
+
+    .annual-cost-label { font-size: 0.85rem; color: #718096; }
+
+    .annual-cost-value {
+      font-size: 1.05rem;
+      font-weight: 700;
+      text-align: right;
+    }
+
+    .annual-cost-value.keep { color: #276749; }
+    .annual-cost-value.replace { color: #2b6cb0; }
+
+    .result-note {
+      font-size: 0.75rem;
+      color: #a0aec0;
+      line-height: 1.6;
+    }
+
+    footer {
+      text-align: center;
+      font-size: 0.75rem;
+      color: #a0aec0;
+      margin-top: 12px;
+      padding: 0 16px 20px;
+      line-height: 1.75;
+      max-width: 680px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    footer p { margin: 0; }
+    footer .footer-sub { margin-top: 8px; font-size: 0.72rem; color: #b8c2cc; }
+
+    /* 管理人のひとこと */
+    .admin-message {
+      margin-top: 20px;
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+      padding: 20px;
+      border: 1px solid #e8edf3;
+    }
+
+    .admin-message-title {
+      font-size: 0.875rem;
+      font-weight: 700;
+      color: #2b6cb0;
+      margin-bottom: 10px;
+      padding-bottom: 8px;
+      border-bottom: 2px solid #ebf8ff;
+    }
+
+    .admin-message-text {
+      font-size: 0.875rem;
+      color: #718096;
+      line-height: 1.75;
+    }
+
+    .admin-message-text + .admin-message-text {
+      margin-top: 0.75em;
+    }
+
+    /* 関連ツール */
+    .related-tools {
+      margin-top: 20px;
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+      padding: 20px;
+      border: 1px solid #e8edf3;
+    }
+
+    .related-tools-title {
+      font-size: 0.875rem;
+      font-weight: 700;
+      color: #2b6cb0;
+      margin-bottom: 12px;
+      padding-bottom: 8px;
+      border-bottom: 2px solid #ebf8ff;
+    }
+
+    .related-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .related-item {
+      display: block;
+      padding: 14px 16px;
+      border: 1.5px solid #e2e8f0;
+      border-radius: 10px;
+      background: #f8fafc;
+      text-decoration: none;
+      color: inherit;
+      transition: background 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease;
+    }
+
+    .related-item:hover,
+    .related-item:focus-visible {
+      background: #ebf8ff;
+      border-color: rgba(49, 130, 206, 0.35);
+      outline: none;
+      box-shadow: 0 2px 8px rgba(49, 130, 206, 0.1);
+    }
+
+    .related-item-name {
+      display: block;
+      font-size: 0.875rem;
+      font-weight: 700;
+      color: #2b6cb0;
+      margin-bottom: 4px;
+      line-height: 1.4;
+    }
+
+    .related-item-desc {
+      display: block;
+      font-size: 0.8125rem;
+      color: #718096;
+      line-height: 1.55;
+    }
+
+    /* 用語説明・結果ガイド（全シミュレーター共通） */
+    .label-row {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      margin-bottom: 6px;
+    }
+
+    .label-row label {
+      margin-bottom: 0;
+    }
+
+    .term-help-btn {
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      border: 1px solid #cbd5e0;
+      background: #edf2f7;
+      color: #4a5568;
+      font-size: 0.75rem;
+      font-weight: 700;
+      cursor: pointer;
+      flex-shrink: 0;
+      line-height: 1;
+      padding: 0;
+      font-family: inherit;
+    }
+
+    .term-help-btn:hover,
+    .term-help-btn:focus-visible {
+      background: #dbeafe;
+      border-color: #90cdf4;
+      outline: none;
+    }
+
+    .term-help-panel {
+      display: none;
+      margin: 0 0 10px;
+      padding: 10px 12px;
+      background: #f7fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 8px;
+      font-size: 0.82rem;
+      color: #4a5568;
+      line-height: 1.65;
+    }
+
+    .term-help-panel.open {
+      display: block;
+    }
+
+    .result-guide {
+      margin-top: 16px;
+      padding: 14px 16px;
+      border-radius: 10px;
+      border: 1px solid #e2e8f0;
+      background: #f7fafc;
+    }
+
+    .result-guide-title {
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: #4a5568;
+      margin-bottom: 8px;
+    }
+
+    .result-guide-body {
+      font-size: 0.88rem;
+      line-height: 1.7;
+      color: #2d3748;
+    }
+
+    .result-guide-detail {
+      display: block;
+      margin-top: 6px;
+      font-size: 0.8rem;
+      color: #718096;
+    }
+
+    .result-guide--good {
+      border-left: 4px solid #38a169;
+      background: #f0fff4;
+    }
+
+    .result-guide--warn {
+      border-left: 4px solid #d69e2e;
+      background: #fffff0;
+    }
+
+    .result-guide--bad {
+      border-left: 4px solid #e53e3e;
+      background: #fff5f5;
+    }
+
+    .result-guide--neutral {
+      border-left: 4px solid #cbd5e0;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <nav class="site-nav" aria-label="サイト内ナビゲーション">
+      <div class="breadcrumb" aria-label="パンくずリスト">
+        <a href="https://financial-tools-lab.vercel.app">ホーム</a>
+        <span class="breadcrumb-sep" aria-hidden="true">&gt;</span>
+        <span class="breadcrumb-current" aria-current="page">車買い替えコスト比較シミュレーター</span>
+      </div>
+      <a href="https://financial-tools-lab.vercel.app" class="back-to-top">← ツール集トップへ戻る</a>
+    </nav>
+
+    <header>
+      <h1>車買い替え 比較シミュレーター</h1>
+      <p>今の車に乗り続けるか、新しい車に買い替えるか。総コストを比較できます。</p>
+      <div class="display-unit-bar">
+        <span class="display-unit-label">表示単位</span>
+        <div class="display-unit-options">
+          <label class="display-unit-option">
+            <input type="radio" name="displayUnit" value="man" checked /> 万円表示
+          </label>
+          <label class="display-unit-option">
+            <input type="radio" name="displayUnit" value="yen" /> 円表示
+          </label>
+        </div>
+      </div>
+    </header>
+
+    <main class="main-layout">
+
+      <!-- 入力条件 -->
+      <section class="section-input">
+        <h2><span class="step-badge">入力</span>入力条件</h2>
+        <p class="section-desc">数字を変えると、結果が自動で更新されます。</p>
+        <div id="error" class="error"></div>
+
+        <div class="field">
+          <div class="label-row">
+            <label for="compareYears">比較年数</label>
+            <button type="button" class="term-help-btn" data-term-help="compareYears" aria-expanded="false" aria-controls="termHelp-compareYears">?</button>
+          </div>
+          <div class="term-help-panel" id="termHelp-compareYears"></div>
+          <div class="input-wrap">
+            <input type="number" id="compareYears" value="5" min="1" step="1" />
+            <span class="unit">年</span>
+          </div>
+        </div>
+
+        <div class="field-group">
+          <div class="field-group-title">現在の車の情報</div>
+          <div class="field">
+            <div class="label-row">
+              <label for="annualDistance">年間走行距離</label>
+              <button type="button" class="term-help-btn" data-term-help="annualDistance" aria-expanded="false" aria-controls="termHelp-annualDistance">?</button>
+            </div>
+            <div class="term-help-panel" id="termHelp-annualDistance"></div>
+            <div class="input-wrap">
+              <input type="text" inputmode="numeric" id="annualDistance" value="10,000" autocomplete="off" />
+              <span class="unit">km</span>
+            </div>
+          </div>
+          <div class="field">
+            <div class="label-row">
+              <label for="currentMileage">燃費</label>
+              <button type="button" class="term-help-btn" data-term-help="currentMileage" aria-expanded="false" aria-controls="termHelp-currentMileage">?</button>
+            </div>
+            <div class="term-help-panel" id="termHelp-currentMileage"></div>
+            <div class="input-wrap">
+              <input type="number" id="currentMileage" value="10" min="0.1" step="0.1" />
+              <span class="unit">km/L</span>
+            </div>
+          </div>
+          <div class="field">
+            <div class="label-row">
+              <label for="gasPrice">ガソリン価格</label>
+              <button type="button" class="term-help-btn" data-term-help="gasPrice" aria-expanded="false" aria-controls="termHelp-gasPrice">?</button>
+            </div>
+            <div class="term-help-panel" id="termHelp-gasPrice"></div>
+            <div class="input-wrap">
+              <input type="number" id="gasPrice" value="170" min="0" step="1" />
+              <span class="unit">円/L</span>
+            </div>
+          </div>
+          <div class="field">
+            <div class="label-row">
+              <label for="currentMaintenance">年間維持費</label>
+              <button type="button" class="term-help-btn" data-term-help="currentMaintenance" aria-expanded="false" aria-controls="termHelp-currentMaintenance">?</button>
+            </div>
+            <div class="term-help-panel" id="termHelp-currentMaintenance"></div>
+            <div class="input-wrap">
+              <input type="text" inputmode="numeric" id="currentMaintenance" value="100,000" autocomplete="off" />
+              <span class="unit">円／年</span>
+            </div>
+            <p class="hint">車検・保険・税金・メンテナンスなど</p>
+          </div>
+        </div>
+
+        <div class="field-group">
+          <div class="field-group-title">新しい車の情報</div>
+          <div class="field">
+            <div class="label-row">
+              <label for="newMileage">燃費</label>
+              <button type="button" class="term-help-btn" data-term-help="newMileage" aria-expanded="false" aria-controls="termHelp-newMileage">?</button>
+            </div>
+            <div class="term-help-panel" id="termHelp-newMileage"></div>
+            <div class="input-wrap">
+              <input type="number" id="newMileage" value="16" min="0.1" step="0.1" />
+              <span class="unit">km/L</span>
+            </div>
+          </div>
+          <div class="field">
+            <div class="label-row">
+              <label for="newMaintenance">年間維持費</label>
+              <button type="button" class="term-help-btn" data-term-help="newMaintenance" aria-expanded="false" aria-controls="termHelp-newMaintenance">?</button>
+            </div>
+            <div class="term-help-panel" id="termHelp-newMaintenance"></div>
+            <div class="input-wrap">
+              <input type="text" inputmode="numeric" id="newMaintenance" value="50,000" autocomplete="off" />
+              <span class="unit">円／年</span>
+            </div>
+            <p class="hint">車検・保険・税金・メンテナンスなど</p>
+          </div>
+          <div class="field">
+            <div class="label-row">
+              <label for="newCarPrice">新車価格</label>
+              <button type="button" class="term-help-btn" data-term-help="newCarPrice" aria-expanded="false" aria-controls="termHelp-newCarPrice">?</button>
+            </div>
+            <div class="term-help-panel" id="termHelp-newCarPrice"></div>
+            <div class="input-wrap">
+              <input type="text" inputmode="numeric" id="newCarPrice" value="3,000,000" autocomplete="off" />
+              <span class="unit">円</span>
+            </div>
+          </div>
+          <div class="field">
+            <div class="label-row">
+              <label for="tradeInPrice">下取り価格</label>
+              <button type="button" class="term-help-btn" data-term-help="tradeInPrice" aria-expanded="false" aria-controls="termHelp-tradeInPrice">?</button>
+            </div>
+            <div class="term-help-panel" id="termHelp-tradeInPrice"></div>
+            <div class="input-wrap">
+              <input type="text" inputmode="numeric" id="tradeInPrice" value="500,000" autocomplete="off" />
+              <span class="unit">円</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 結果 -->
+      <section class="section-result">
+        <h2><span class="step-badge">結果</span>シミュレーション結果</h2>
+
+        <!-- 判定 -->
+        <div class="verdict-box" id="verdictBox">
+          <div class="verdict-icon" id="verdictIcon">—</div>
+          <div class="verdict-main" id="verdictMain">—</div>
+          <div class="verdict-sub" id="verdictSub"></div>
+        </div>
+
+        <!-- 積み上げ棒グラフ -->
+        <div class="chart-block">
+          <div class="chart-block-title" id="chartTitle">総コストの比較（5年間の合計）</div>
+
+          <div class="stacked-bar-item">
+            <div class="stacked-bar-label">現在の車</div>
+            <div class="stacked-bar-row">
+              <div class="stacked-bar-track" id="stackKeep"></div>
+              <div class="stacked-bar-total" id="stackKeepTotal">—</div>
+            </div>
+          </div>
+
+          <div class="stacked-bar-item">
+            <div class="stacked-bar-label">新しい車</div>
+            <div class="stacked-bar-row">
+              <div class="stacked-bar-track" id="stackReplace"></div>
+              <div class="stacked-bar-total" id="stackReplaceTotal">—</div>
+            </div>
+          </div>
+
+          <div class="chart-legend">
+            <span class="legend-item"><span class="legend-dot fuel"></span>燃料代</span>
+            <span class="legend-item"><span class="legend-dot maint"></span>維持費</span>
+            <span class="legend-item"><span class="legend-dot vehicle"></span>車両代</span>
+          </div>
+        </div>
+
+        <!-- 費用の内訳（比較表） -->
+        <div class="compare-table-wrap">
+          <div class="compare-table-block-title" id="tableTitle">費用の内訳（5年間の合計）</div>
+          <table class="compare-table">
+            <thead>
+              <tr>
+                <th>項目</th>
+                <th class="col-keep">現在の車を維持</th>
+                <th class="col-replace">新しい車に買替</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>燃料代</td>
+                <td class="val-keep" id="cellKeepFuel"></td>
+                <td class="val-replace" id="cellReplaceFuel"></td>
+              </tr>
+              <tr>
+                <td>維持費</td>
+                <td class="val-keep" id="cellKeepMaint"></td>
+                <td class="val-replace" id="cellReplaceMaint"></td>
+              </tr>
+              <tr>
+                <td>車両代</td>
+                <td class="val-keep" id="cellKeepVehicle"></td>
+                <td class="val-replace" id="cellReplaceVehicle"></td>
+              </tr>
+              <tr class="row-total">
+                <td>総コスト</td>
+                <td class="val-keep" id="cellKeepTotal"></td>
+                <td class="val-replace" id="cellReplaceTotal"></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div id="resultGuide" class="result-guide result-guide--neutral"></div>
+
+        <!-- 年間コスト -->
+        <div class="annual-cost">
+          <div class="annual-cost-title">年間コスト</div>
+          <div class="annual-cost-row">
+            <span class="annual-cost-label">今の車に乗り続ける</span>
+            <span class="annual-cost-value keep" id="annualKeep">—</span>
+          </div>
+          <div class="annual-cost-row">
+            <span class="annual-cost-label">新しい車に買い替える</span>
+            <span class="annual-cost-value replace" id="annualReplace">—</span>
+          </div>
+        </div>
+
+        <p class="result-note">※ガソリン価格・維持費は一定と仮定した試算です。</p>
+      </section>
+
+    </main>
+
+    <aside class="admin-message" aria-labelledby="admin-message-heading">
+      <h2 class="admin-message-title" id="admin-message-heading">管理人のひとこと</h2>
+      <p class="admin-message-text">車の維持費や買い替えタイミングは、住宅ローンや教育費と合わせて考えると家計全体が見えやすくなります。</p>
+      <p class="admin-message-text">燃費改善だけでなく、維持費の差も含めて比較すると、買い替えの判断材料がより具体的になります。</p>
+      <p class="admin-message-text">この結果を参考に、無理のないペースで家計全体のバランスを考えてみてください。</p>
+    </aside>
+
+    <nav class="related-tools" aria-labelledby="related-tools-heading">
+      <h2 class="related-tools-title" id="related-tools-heading">関連ツール</h2>
+      <ul class="related-list">
+        <li>
+          <a class="related-item" href="https://mortgage-invest-simulator.vercel.app/" target="_blank" rel="noopener noreferrer">
+            <span class="related-item-name">🏆 人気No.1 住宅ローン × 投資比較シミュレーター</span>
+            <span class="related-item-desc">繰上返済と投資のどちらが有利か比較できます。</span>
+          </a>
+        </li>
+        <li>
+          <a class="related-item" href="https://asset-simulator-five.vercel.app/" target="_blank" rel="noopener noreferrer">
+            <span class="related-item-name">資産推移シミュレーター</span>
+            <span class="related-item-desc">毎月の積立や運用による資産形成を試算できます。</span>
+          </a>
+        </li>
+        <li>
+          <a class="related-item" href="https://education-fund-simulator.vercel.app/" target="_blank" rel="noopener noreferrer">
+            <span class="related-item-name">教育費シミュレーター</span>
+            <span class="related-item-desc">お子さまの進路に合わせた教育資金を試算できます。</span>
+          </a>
+        </li>
+        <li>
+          <a class="related-item" href="https://retirement-plan-simulator.vercel.app/" target="_blank" rel="noopener noreferrer">
+            <span class="related-item-name">老後資産取り崩しシミュレーター</span>
+            <span class="related-item-desc">年金と資産を取り崩した場合、何歳まで資産が持つか試算できます。</span>
+          </a>
+        </li>
+      </ul>
+    </nav>
+
+    <footer>
+      <p>※本シミュレーターは一定の条件に基づく参考試算です。実際の費用を保証するものではありません。</p>
+      <p class="footer-sub">燃料代 = 年間走行距離 ÷ 燃費 × ガソリン価格 × 比較年数 ／ 維持費 = 年間維持費 × 比較年数</p>
+    </footer>
+  </div>
+
+  <script>
+    /**
+     * 用語説明・結果ガイド共通UI
+     * 各シミュレーターの index.html に同内容を埋め込んで使用
+     */
+    var SimulatorUI = (function () {
+      /** 用語説明パネルにテキストをセットし、?ボタンの開閉を設定 */
+      function initTermHelp(terms) {
+        Object.keys(terms).forEach(function (key) {
+          var panel = document.getElementById("termHelp-" + key);
+          if (panel) panel.textContent = terms[key];
+        });
+
+        document.querySelectorAll(".term-help-btn").forEach(function (btn) {
+          btn.addEventListener("click", function (e) {
+            e.preventDefault();
+            var key = btn.getAttribute("data-term-help");
+            var panel = document.getElementById("termHelp-" + key);
+            if (!panel) return;
+
+            var willOpen = !panel.classList.contains("open");
+            document.querySelectorAll(".term-help-panel").forEach(function (p) {
+              p.classList.remove("open");
+            });
+            document.querySelectorAll(".term-help-btn").forEach(function (b) {
+              b.setAttribute("aria-expanded", "false");
+            });
+
+            if (willOpen) {
+              panel.classList.add("open");
+              btn.setAttribute("aria-expanded", "true");
+            }
+          });
+        });
+      }
+
+      /** 結果の見方エリアを更新（level: good / warn / bad / neutral） */
+      function renderResultGuide(id, level, message, detail) {
+        var el = document.getElementById(id);
+        if (!el) return;
+        el.className = "result-guide result-guide--" + level;
+        el.innerHTML =
+          '<div class="result-guide-title">結果の見方</div>' +
+          '<div class="result-guide-body">' +
+          message +
+          (detail
+            ? '<span class="result-guide-detail">' + detail + "</span>"
+            : "") +
+          "</div>";
+      }
+
+      function clearResultGuide(id) {
+        var el = document.getElementById(id);
+        if (!el) return;
+        el.className = "result-guide result-guide--neutral";
+        el.innerHTML = "";
+      }
+
+      return {
+        initTermHelp: initTermHelp,
+        renderResultGuide: renderResultGuide,
+        clearResultGuide: clearResultGuide,
+      };
+    })();
+
+    // ===== 表示まわりの共通関数 =====
+
+    function getDisplayUnit() {
+      var selected = document.querySelector('input[name="displayUnit"]:checked');
+      return selected ? selected.value : "man";
+    }
+
+    /** 金額を「180万円」または「1,800,000円」の形式に変換 */
+    function formatMoney(value) {
+      if (getDisplayUnit() === "man") {
+        return Math.round(value / 10000).toLocaleString("ja-JP") + "万円";
+      }
+      return Math.round(value).toLocaleString("ja-JP") + "円";
+    }
+
+    /** 棒グラフ内の短いラベル（例: 71万） */
+    function formatBarLabel(value) {
+      if (getDisplayUnit() === "man") {
+        return Math.round(value / 10000).toLocaleString("ja-JP") + "万";
+      }
+      if (value >= 10000) {
+        return Math.round(value / 10000).toLocaleString("ja-JP") + "万";
+      }
+      return Math.round(value).toLocaleString("ja-JP");
+    }
+
+    /** 年間金額（例: 14.2万円／年） */
+    function formatMoneyPerYear(value) {
+      if (getDisplayUnit() === "man") {
+        var man = value / 10000;
+        var text = man.toLocaleString("ja-JP", {
+          maximumFractionDigits: 1,
+          minimumFractionDigits: 0
+        });
+        return text + "万円／年";
+      }
+      return Math.round(value).toLocaleString("ja-JP") + "円／年";
+    }
+
+    function parseInputNumber(str) {
+      var cleaned = String(str).replace(/[,，\s]/g, "");
+      var n = Number(cleaned);
+      return Number.isFinite(n) ? n : 0;
+    }
+
+    function formatInputComma(value) {
+      if (!Number.isFinite(value) || value === 0) return "0";
+      return Math.round(value).toLocaleString("ja-JP");
+    }
+
+    function setupMoneyInput(id) {
+      var el = document.getElementById(id);
+      el.addEventListener("focus", function () {
+        var num = parseInputNumber(el.value);
+        el.value = num === 0 ? "" : String(num);
+      });
+      el.addEventListener("blur", function () {
+        el.value = formatInputComma(parseInputNumber(el.value));
+      });
+      el.addEventListener("input", calculate);
+    }
+
+    /** 比較表セル（金額 + 補足テキスト） */
+    function formatTableCell(mainValue, subText) {
+      return (
+        '<div class="cell-main">' + formatMoney(mainValue) + "</div>" +
+        '<div class="cell-sub">' + subText + "</div>"
+      );
+    }
+
+    // ===== 積み上げ棒グラフ =====
+
+    /**
+     * 積み上げ棒グラフを描画
+     * @param {Object} cost - { vehicleCost, maintenanceCost, fuelCost, totalCost }
+     * @param {string} trackId - 棒グラフコンテナのID
+     * @param {string} totalId - 合計金額表示のID
+     * @param {number} maxTotal - スケール基準（2本の棒で共通）
+     */
+    function updateStackedBar(cost, trackId, totalId, maxTotal) {
+      var track = document.getElementById(trackId);
+      var segments = [
+        { key: "fuelCost", cls: "seg-fuel" },
+        { key: "maintenanceCost", cls: "seg-maint" },
+        { key: "vehicleCost", cls: "seg-vehicle" }
+      ];
+
+      var html = "";
+      segments.forEach(function (seg) {
+        var value = cost[seg.key];
+        if (value <= 0) return;
+
+        // 棒の幅 = セグメント金額 ÷ 最大総コスト
+        var widthPct = maxTotal > 0 ? (value / maxTotal) * 100 : 0;
+        // 幅が十分なときだけ棒の中に金額を表示
+        var showLabel = widthPct >= 7;
+        var label = showLabel ? formatBarLabel(value) : "";
+
+        html +=
+          '<div class="stacked-seg ' + seg.cls + '" style="width:' + widthPct + '%">' +
+          label + "</div>";
+      });
+
+      track.innerHTML = html;
+      document.getElementById(totalId).textContent = formatMoney(cost.totalCost);
+    }
+
+    // ===== メイン計算 =====
+
+    function calcAnnualFuelCost(annualDistance, mileage, gasPrice) {
+      if (mileage <= 0) return null;
+      return (annualDistance / mileage) * gasPrice;
+    }
+
+    function calculate() {
+      var errorEl = document.getElementById("error");
+      errorEl.classList.remove("show");
+      errorEl.textContent = "";
+
+      var annualDistance = parseInputNumber(document.getElementById("annualDistance").value);
+      var currentMileage = parseInputNumber(document.getElementById("currentMileage").value);
+      var newMileage = parseInputNumber(document.getElementById("newMileage").value);
+      var gasPrice = parseInputNumber(document.getElementById("gasPrice").value);
+      var newCarPrice = parseInputNumber(document.getElementById("newCarPrice").value);
+      var tradeInPrice = parseInputNumber(document.getElementById("tradeInPrice").value);
+      var compareYears = parseInputNumber(document.getElementById("compareYears").value);
+      var currentMaintenanceYearly = parseInputNumber(document.getElementById("currentMaintenance").value);
+      var newMaintenanceYearly = parseInputNumber(document.getElementById("newMaintenance").value);
+
+      if (annualDistance <= 0) {
+        errorEl.textContent = "年間走行距離は0より大きい値を入力してください。";
+        errorEl.classList.add("show");
+        SimulatorUI.clearResultGuide("resultGuide");
+        return;
+      }
+      if (currentMileage <= 0 || newMileage <= 0) {
+        errorEl.textContent = "燃費は0より大きい値を入力してください。";
+        errorEl.classList.add("show");
+        SimulatorUI.clearResultGuide("resultGuide");
+        return;
+      }
+      if (gasPrice < 0) {
+        errorEl.textContent = "ガソリン価格は0以上の値を入力してください。";
+        errorEl.classList.add("show");
+        SimulatorUI.clearResultGuide("resultGuide");
+        return;
+      }
+      if (compareYears <= 0) {
+        errorEl.textContent = "比較年数は1年以上を入力してください。";
+        errorEl.classList.add("show");
+        SimulatorUI.clearResultGuide("resultGuide");
+        return;
+      }
+      if (currentMaintenanceYearly < 0 || newMaintenanceYearly < 0) {
+        errorEl.textContent = "年間維持費は0以上の値を入力してください。";
+        errorEl.classList.add("show");
+        SimulatorUI.clearResultGuide("resultGuide");
+        return;
+      }
+      if (tradeInPrice > newCarPrice) {
+        errorEl.textContent = "下取り価格が新車価格を上回っています。値をご確認ください。";
+        errorEl.classList.add("show");
+      }
+
+      // --- 計算（ロジックは変更なし） ---
+
+      var annualFuelKeep = calcAnnualFuelCost(annualDistance, currentMileage, gasPrice);
+      var annualFuelReplace = calcAnnualFuelCost(annualDistance, newMileage, gasPrice);
+
+      var keepFuelTotal = annualFuelKeep * compareYears;
+      var replaceFuelTotal = annualFuelReplace * compareYears;
+      var keepMaintenanceTotal = currentMaintenanceYearly * compareYears;
+      var replaceMaintenanceTotal = newMaintenanceYearly * compareYears;
+      var purchaseCost = Math.max(0, newCarPrice - tradeInPrice);
+
+      var keepCost = {
+        vehicleCost: 0,
+        maintenanceCost: keepMaintenanceTotal,
+        fuelCost: keepFuelTotal,
+        totalCost: keepFuelTotal + keepMaintenanceTotal
+      };
+
+      var replaceCost = {
+        vehicleCost: purchaseCost,
+        maintenanceCost: replaceMaintenanceTotal,
+        fuelCost: replaceFuelTotal,
+        totalCost: purchaseCost + replaceFuelTotal + replaceMaintenanceTotal
+      };
+
+      var totalKeep = keepCost.totalCost;
+      var totalReplace = replaceCost.totalCost;
+      var costDiff = totalReplace - totalKeep;
+      var absDiff = Math.abs(costDiff);
+      var maxTotal = Math.max(totalKeep, totalReplace, 1);
+
+      // タイトルに比較年数を反映
+      document.getElementById("chartTitle").textContent =
+        "総コストの比較（" + compareYears + "年間の合計）";
+      document.getElementById("tableTitle").textContent =
+        "費用の内訳（" + compareYears + "年間の合計）";
+
+      // --- 積み上げ棒グラフ ---
+      updateStackedBar(keepCost, "stackKeep", "stackKeepTotal", maxTotal);
+      updateStackedBar(replaceCost, "stackReplace", "stackReplaceTotal", maxTotal);
+
+      // --- 比較表 ---
+      var fuelSubKeep = formatMoneyPerYear(annualFuelKeep) + " × " + compareYears + "年";
+      var fuelSubReplace = formatMoneyPerYear(annualFuelReplace) + " × " + compareYears + "年";
+      var maintSubKeep = formatMoneyPerYear(currentMaintenanceYearly) + " × " + compareYears + "年";
+      var maintSubReplace = formatMoneyPerYear(newMaintenanceYearly) + " × " + compareYears + "年";
+
+      document.getElementById("cellKeepFuel").innerHTML =
+        formatTableCell(keepFuelTotal, fuelSubKeep);
+      document.getElementById("cellReplaceFuel").innerHTML =
+        formatTableCell(replaceFuelTotal, fuelSubReplace);
+      document.getElementById("cellKeepMaint").innerHTML =
+        formatTableCell(keepMaintenanceTotal, maintSubKeep);
+      document.getElementById("cellReplaceMaint").innerHTML =
+        formatTableCell(replaceMaintenanceTotal, maintSubReplace);
+      document.getElementById("cellKeepVehicle").innerHTML =
+        formatTableCell(0, "—");
+      document.getElementById("cellReplaceVehicle").innerHTML =
+        formatTableCell(purchaseCost, "新車価格 − 下取り価格");
+      document.getElementById("cellKeepTotal").innerHTML =
+        formatTableCell(totalKeep, compareYears + "年間の合計");
+      document.getElementById("cellReplaceTotal").innerHTML =
+        formatTableCell(totalReplace, compareYears + "年間の合計");
+
+      // --- 判定 ---
+      var verdictBox = document.getElementById("verdictBox");
+      var verdictIcon = document.getElementById("verdictIcon");
+      var verdictMain = document.getElementById("verdictMain");
+      var verdictSub = document.getElementById("verdictSub");
+
+      verdictBox.className = "verdict-box";
+
+      if (absDiff < 1000) {
+        verdictBox.classList.add("neutral");
+        verdictIcon.textContent = "⚖️";
+        verdictMain.textContent = "ほぼ同じコストです";
+        verdictSub.textContent = compareYears + "年間の総コストに大きな差はありません。";
+      } else if (costDiff > 0) {
+        verdictBox.classList.add("keep-better");
+        verdictIcon.textContent = "👍";
+        verdictMain.textContent = "現在の車を維持した方がお得です！";
+        verdictSub.textContent =
+          "総コストの差額：" + formatMoney(absDiff) + "（現在の車の方が安い）";
+      } else {
+        verdictBox.classList.add("replace-better");
+        verdictIcon.textContent = "👍";
+        verdictMain.textContent = "新しい車に買い替えた方がお得です！";
+        verdictSub.textContent =
+          "総コストの差額：" + formatMoney(absDiff) + "（新しい車の方が安い）";
+      }
+
+      // --- 年間コスト ---
+      document.getElementById("annualKeep").textContent =
+        formatMoneyPerYear(totalKeep / compareYears);
+      document.getElementById("annualReplace").textContent =
+        formatMoneyPerYear(totalReplace / compareYears);
+
+      // --- 結果の見方 ---
+      var avgTotal = (totalKeep + totalReplace) / 2;
+      var diffRatio = avgTotal > 0 ? absDiff / avgTotal : 0;
+      var guideLevel, guideMsg, guideDetail;
+
+      if (absDiff < 1000) {
+        guideLevel = "bad";
+        guideMsg = "どちらを選んでも、総コストに大きな差はなさそうです。";
+        guideDetail = "乗り心地や安全性、維持の手間など、コスト以外の要素もあわせて考えてみてください。";
+      } else if (diffRatio < 0.05 || absDiff < 100000) {
+        guideLevel = "warn";
+        if (costDiff > 0) {
+          guideMsg = "今の車を維持する方がやや安くなる見込みですが、差額は大きくはありません。";
+        } else {
+          guideMsg = "買い替えた方がやや安くなる見込みですが、差額は大きくはありません。";
+        }
+        guideDetail = "ガソリン価格や維持費が少し変わると、結果も変わる可能性があります。";
+      } else {
+        guideLevel = "good";
+        if (costDiff > 0) {
+          guideMsg = "今の車を維持した方が、総コストではかなり有利に見えます。";
+        } else {
+          guideMsg = "買い替えた方が、総コストではかなり有利に見えます。";
+        }
+        guideDetail = "試算上の差額は " + formatMoney(absDiff) + " 程度です。";
+      }
+
+      SimulatorUI.renderResultGuide("resultGuide", guideLevel, guideMsg, guideDetail);
+    }
+
+    // ===== イベント登録 =====
+    setupMoneyInput("annualDistance");
+    setupMoneyInput("newCarPrice");
+    setupMoneyInput("tradeInPrice");
+    setupMoneyInput("currentMaintenance");
+    setupMoneyInput("newMaintenance");
+
+    ["currentMileage", "newMileage", "gasPrice", "compareYears"].forEach(function (id) {
+      document.getElementById(id).addEventListener("input", calculate);
+    });
+
+    document.querySelectorAll('input[name="displayUnit"]').forEach(function (el) {
+      el.addEventListener("change", calculate);
+    });
+
+    SimulatorUI.initTermHelp({
+      compareYears: "何年分のコストを比べる期間です。これからどれくらい乗る予定かを目安に入れてみてください。",
+      annualDistance: "1年間に走る距離の目安です。通勤や送迎、お出かけの頻度から考えてみてください。",
+      currentMileage: "今の車の燃費（1リットルで走れる距離）です。カタログ値や給油記録があると近い数字が入れやすいです。",
+      gasPrice: "1リットルあたりのガソリン代の目安です。よく利用するスタンドの値段を参考にしてください。",
+      currentMaintenance: "今の車の年間維持費です。車検・保険・税金・タイヤ交換など、車にかかる費用の合計イメージです。",
+      newMileage: "買い替え先の車の燃費です。カタログのWLTC燃費などを参考にしてください。",
+      newMaintenance: "新しい車の年間維持費です。新車割引や保証内容によって変わる場合があります。",
+      newCarPrice: "買い替え先の車の購入価格です。オプションや諸費用を除いた本体価格の目安で構いません。",
+      tradeInPrice: "現在の車を下取りに出したときの価格目安です。将来その車を売却したときに期待できる価格です。"
+    });
+
+    calculate();
+  </script>
+</body>
+</html>
