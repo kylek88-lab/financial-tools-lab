@@ -15,7 +15,8 @@ const STATIC_PAGES = [
   { path: "/", file: "index.html" },
   { path: "/privacy.html", file: "privacy.html" },
   { path: "/simulator/mortgage-invest/", file: "simulator/mortgage-invest/index.html" },
-  { path: "/simulator/education/", file: "simulator/education/index.html" }
+  { path: "/simulator/education/", file: "simulator/education/index.html" },
+  { path: "/simulator/asset/", file: "simulator/asset/index.html" }
 ];
 
 function escapeXml(value) {

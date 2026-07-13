@@ -57,7 +57,7 @@
       title: "資産推移シミュレーター",
       description: "現在の資産や積立額から、将来の資産形成や老後資金の目安をシミュレーションできます。",
       descriptionShort: "資産や積立額から、将来の資産形成の目安を試算できます。",
-      href: "https://asset-simulator-five.vercel.app/",
+      href: "/simulator/asset/",
       icon: "chart",
       recommendations: [
         "老後資金が気になる",
